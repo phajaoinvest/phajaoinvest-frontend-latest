@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 25% 27%;
+    --card: 214 32% 91%;
+    --card-foreground: 215 28% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 159 64% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 159 64% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 214 32% 91%;
+    --ring: 160 84% 39%;
+    --chart-1: 159 64% 52%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 215 16% 47%;
+    --chart-4: 0 84% 60%;
+    --chart-5: 43 96% 56%;
+    --sidebar: 214 32% 91%;
+    --sidebar-foreground: 215 28% 17%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 159 64% 52%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 160 84% 39%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 159 64% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 160 84% 39%;
+    --chart-1: 159 64% 52%;
+    --chart-2: 160 84% 39%;
+    --chart-3: 215 20.2% 65.1%;
+    --chart-4: 0 62.8% 30.6%;
+    --chart-5: 43 96% 56%;
+    --sidebar: 217.2 32.6% 17.5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 159 64% 52%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 160 84% 39%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* font-family: "Playwrite RO" !important; */
+  }
+}
+
+.text-xs {
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+}
+
+/* Added custom Swiper styles for better mobile experience */
+.services-swiper .swiper-pagination-bullet {
+  background-color: hsl(var(--primary));
+  opacity: 0.3;
+}
+
+.services-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.services-swiper .swiper-button-next,
+.services-swiper .swiper-button-prev {
+  color: hsl(var(--primary));
+  width: 30px;
+  height: 30px;
+}
+
+.services-swiper .swiper-button-next:after,
+.services-swiper .swiper-button-prev:after {
+  font-size: 16px;
+}
+
+.news-swiper .swiper-pagination-bullet {
+  background-color: hsl(var(--primary));
+  opacity: 0.3;
+}
+
+.news-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.news-swiper .swiper-button-next,
+.news-swiper .swiper-button-prev {
+  color: hsl(var(--primary));
+  width: 30px;
+  height: 30px;
+}
+
+.news-swiper .swiper-button-next:after,
+.news-swiper .swiper-button-prev:after {
+  font-size: 16px;
+}
+
+/* Added responsive padding for Swiper containers */
+.services-swiper,
+.news-swiper {
+  padding-bottom: 40px !important;
+}
+
+@media (max-width: 768px) {
+  .services-swiper .swiper-button-next,
+  .services-swiper .swiper-button-prev,
+  .news-swiper .swiper-button-next,
+  .news-swiper .swiper-button-prev {
+    display: none;
+  }
+}
