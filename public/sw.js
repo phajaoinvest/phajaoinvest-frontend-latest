@@ -4,14 +4,20 @@ const DYNAMIC_CACHE_NAME = "phajaoinvest-dynamic-v1";
 const PRECACHE_ASSETS = [
   "/",
   "/manifest.json",
-  "/icons/icon-192x192.svg",
-  "/icons/icon-512x512.svg",
+  "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png",
   "/placeholder-logo.svg",
   "/placeholder-logo.png",
 ];
 
+const hasCaches = typeof caches !== "undefined";
+
 // Install: precache critical static assets
 self.addEventListener("install", (event) => {
+  if (!hasCaches) {
+    self.skipWaiting();
+    return;
+  }
   event.waitUntil(
     caches
       .open(STATIC_CACHE_NAME)
@@ -22,6 +28,10 @@ self.addEventListener("install", (event) => {
 
 // Activate: clean up old caches
 self.addEventListener("activate", (event) => {
+  if (!hasCaches) {
+    event.waitUntil(self.clients.claim());
+    return;
+  }
   event.waitUntil(
     caches
       .keys()
@@ -46,6 +56,9 @@ self.addEventListener("fetch", (event) => {
 
   // Skip non-GET requests
   if (request.method !== "GET") return;
+
+  // If Cache API is not available, let all requests go to network
+  if (!hasCaches) return;
 
   // Skip cross-origin requests (except CDN)
   if (url.origin !== self.location.origin) {
@@ -97,34 +110,51 @@ function isStaticAsset(url) {
 }
 
 async function cacheFirst(request, cacheName) {
-  const cached = await caches.match(request);
-  if (cached) return cached;
+  try {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+  } catch {
+    // Cache API failed, fall through to network
+  }
 
   try {
     const response = await fetch(request);
-    if (response.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, response.clone());
+    try {
+      if (response.ok) {
+        const cache = await caches.open(cacheName);
+        cache.put(request, response.clone());
+      }
+    } catch {
+      // Cache write failed, ignore
     }
     return response;
   } catch {
-    return caches.match("/") || new Response("Offline", { status: 503 });
+    return new Response("Offline", { status: 503 });
   }
 }
 
 async function networkFirst(request, cacheName) {
   try {
     const response = await fetch(request);
-    if (response.ok) {
-      const cache = await caches.open(cacheName);
-      cache.put(request, response.clone());
+    try {
+      if (response.ok) {
+        const cache = await caches.open(cacheName);
+        cache.put(request, response.clone());
+      }
+    } catch {
+      // Cache write failed, ignore
     }
     return response;
   } catch {
-    const cached = await caches.match(request);
-    if (cached) return cached;
-    if (request.mode === "navigate") {
-      return caches.match("/") || new Response("Offline", { status: 503 });
+    try {
+      const cached = await caches.match(request);
+      if (cached) return cached;
+      if (request.mode === "navigate") {
+        const fallback = await caches.match("/");
+        if (fallback) return fallback;
+      }
+    } catch {
+      // Cache read failed, ignore
     }
     return new Response("Offline", { status: 503 });
   }
