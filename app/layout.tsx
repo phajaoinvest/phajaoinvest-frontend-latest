@@ -33,7 +33,7 @@ export default function RootLayout({
 
             <Link
               href="/support"
-              className="fixed bottom-3 sm:bottom-6 right-3 sm:right-6 z-50 flex items-center gap-2 rounded-lg bg-primary px-4 py-3 text-white shadow-lg hover:bg-primary transition-all"
+              className="fixed bottom-16 sm:bottom-6 right-3 sm:right-6 z-50 flex items-center gap-2 rounded-lg bg-primary px-4 py-3 text-white shadow-lg hover:bg-primary transition-all"
             >
               <Headset size={18} className="animate-bounce" />
               <span className="text-sm hidden sm:block">Support</span>

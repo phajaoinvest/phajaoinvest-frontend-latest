@@ -3,10 +3,9 @@
 import Link from "next/link"
 import type React from "react"
 import { usePathname } from "next/navigation"
-import { User, Crown, TrendingUp, DollarSign, Settings, LogOut, Wallet, Target } from "lucide-react"
+import { User, Crown, TrendingUp, Settings, LogOut, Activity } from "lucide-react"
 
 import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -35,16 +34,17 @@ export default function DashboardLayout({
     { icon: User, label: t("dashboard.sidebar.dashboard"), href: "/dashboard" },
     { icon: Crown, label: t("dashboard.sidebar.membership"), href: "/dashboard/membership" },
     { icon: TrendingUp, label: t("dashboard.sidebar.my_investment"), href: "/dashboard/guaranteed-returns" },
-    { icon: DollarSign, label: t("dashboard.sidebar.my_stock"), href: "/dashboard/international-portfolio" },
-    { icon: Target, label: t("dashboard.sidebar.stock_pick_history"), href: "/dashboard/stock-pick-history" },
+    // { icon: DollarSign, label: t("dashboard.sidebar.my_stock"), href: "/dashboard/international-portfolio" },
+    { icon: Activity, label: t("dashboard.sidebar.stock_pick_history"), href: "/dashboard/stock-pick-history" },
   ]
 
   const mobileSidebarItems = [
     { icon: User, label: t("dashboard.sidebar.home"), href: "/dashboard" },
     { icon: Crown, label: t("dashboard.sidebar.member"), href: "/dashboard/membership" },
     { icon: TrendingUp, label: t("dashboard.sidebar.investment"), href: "/dashboard/guaranteed-returns" },
-    { icon: DollarSign, label: t("dashboard.sidebar.stock_portfolio"), href: "/dashboard/international-portfolio" },
-    { icon: Target, label: t("dashboard.sidebar.stock_picks"), href: "/dashboard/stock-pick-history" },
+    // { icon: ChartNoAxesColumn, label: t("dashboard.sidebar.stock_portfolio"), href: "/dashboard/international-portfolio" },
+    { icon: Activity, label: t("dashboard.sidebar.stock_picks"), href: "/dashboard/stock-pick-history" },
+    { icon: Settings, label: t("dashboard.sidebar.account_settings"), href: "/dashboard/account-settings" },
   ]
 
   const handleSignOut = () => {
@@ -115,25 +115,6 @@ export default function DashboardLayout({
                     </button>
                   </nav>
 
-                  {/* Bottom navigation (visible only on small screens) */}
-                  <nav className="fixed bottom-0 left-0 right-0 z-50 flex lg:hidden justify-around items-center bg-white border-t border-gray-200 shadow-lg py-2 md:py-4">
-                    {mobileSidebarItems.map((item, index) => {
-                      const IconComponent = item.icon
-                      const isActive = pathname === item.href
-                      return (
-                        <Link
-                          key={index}
-                          href={item.href}
-                          className={`flex flex-col items-center justify-center text-xs md:space-y-2 ${isActive ? "text-rose-600 font-medium" : "text-gray-500 hover:text-gray-800"
-                            }`}
-                        >
-                          <IconComponent className="h-3 w-3 md:h-5 md:w-5 mb-0.5" />
-                          <span className="text-[10px] md:text-[16px]">{item.label}</span>
-
-                        </Link>
-                      )
-                    })}
-                  </nav>
                 </CardContent>
               </Card>
 
@@ -148,7 +129,24 @@ export default function DashboardLayout({
         </div>
       </main>
 
-      <Footer />
+      {/* Bottom navigation (visible only on small screens) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden justify-around items-center bg-white border-t border-gray-200 shadow-lg py-2 md:py-4">
+        {mobileSidebarItems.map((item, index) => {
+          const IconComponent = item.icon
+          const isActive = pathname === item.href
+          return (
+            <Link
+              key={index}
+              href={item.href}
+              className={`flex flex-col items-center justify-center text-xs md:space-y-2 ${isActive ? "text-rose-600 font-medium" : "text-gray-500 hover:text-gray-800"
+                }`}
+            >
+              <IconComponent className="h-3 w-3 md:h-5 md:w-5 mb-0.5" />
+              <span className="text-[10px] md:text-[16px]">{item.label}</span>
+            </Link>
+          )
+        })}
+      </nav>
     </div>
   )
 }
