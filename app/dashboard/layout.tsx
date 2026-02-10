@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import { useAuth } from "@/lib/auth-context"
 import { useTranslation } from "@/lib/i18n"
+import { useAuth } from "@/lib/auth-context"
 import { useCustomerStore } from "../store/useCustomerStore"
 
 export default function DashboardLayout({
@@ -23,8 +23,8 @@ export default function DashboardLayout({
   const { logout } = useAuth()
   const { t } = useTranslation()
   const pathname = usePathname()
-  const clearCustomer = useCustomerStore((state) => state.clearCustomer);
   const customer = useCustomerStore((state) => state.customer);
+  const clearCustomer = useCustomerStore((state) => state.clearCustomer);
 
   if (!customer) {
     return <div>Loading...</div>
@@ -141,8 +141,8 @@ export default function DashboardLayout({
               className={`flex flex-col items-center justify-center text-xs md:space-y-2 ${isActive ? "text-rose-600 font-medium" : "text-gray-500 hover:text-gray-800"
                 }`}
             >
-              <IconComponent className="h-3 w-3 md:h-5 md:w-5 mb-0.5" />
-              <span className="text-[10px] md:text-[16px]">{item.label}</span>
+              <IconComponent className="h-4 w-4 md:h-5 md:w-5 mb-0.5" />
+              <span className="text-md font-bold">{item.label}</span>
             </Link>
           )
         })}

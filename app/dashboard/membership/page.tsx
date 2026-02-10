@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { Crown, CreditCard, Calendar, Loader } from "lucide-react"
 
@@ -89,26 +89,28 @@ function PlanCard({ plan, t, onSelectPlan, onRenewPlan }: PlanCardProps) {
     : plan.description
 
   return (
-    <Card className={`relative ${plan.is_current ? "ring-2 ring-primary" : ""}`}>
+    <Card className={`relative overflow-visible ${plan.is_current ? "ring-2 ring-primary" : ""}`}>
       {plan.is_current && (
-        <Badge className="absolute -top-2 left-4 bg-primary text-primary-foreground">
-          {isUnderReview
-            ? t("membership.under_review")
-            : `${t("membership.current")}, ${t("membership.has_expired")}: ${plan.days_left} ${t("membership.days")}`}
-        </Badge>
+        <div className="px-4 pt-4 sm:px-0 sm:pt-0 sm:absolute sm:-top-2 sm:left-4">
+          <Badge className="bg-primary text-primary-foreground text-xs">
+            {isUnderReview
+              ? t("membership.under_review")
+              : `${t("membership.current")}, ${t("membership.has_expired")}: ${plan.days_left} ${t("membership.days")}`}
+          </Badge>
+        </div>
       )}
-      <CardHeader>
-        <CardTitle className="text-sm sm:text-md">{description}</CardTitle>
-        <div className="text-md sm:text-xl font-bold text-primary">
+      <CardHeader className={plan.is_current ? "pt-2 sm:pt-6" : ""}>
+        <CardTitle className="text-base sm:text-md">{description}</CardTitle>
+        <div className="text-xl sm:text-xl font-bold text-primary">
           {plan.currency === "USD" ? "$" : ""}{plan.price}
         </div>
-        <p className="text-xs sm:text-sm text-muted-foreground">{plan.duration_months} {t("membership.months")}</p>
+        <p className="text-sm sm:text-sm text-muted-foreground">{plan.duration_months} {t("membership.months")}</p>
       </CardHeader>
-      <CardContent className="px-2 sm:px-4 py-0 pb-4">
-        <ul className="space-y-2 mb-4">
+      <CardContent className="px-4 sm:px-4 py-0 pb-4">
+        <ul className="space-y-3 mb-6">
           {plan?.features?.map((feature, index) => (
-            <li key={index} className="text-gray-500 text-xs flex items-center">
-              <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
+            <li key={index} className="text-gray-500 text-sm sm:text-xs flex items-center">
+              <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2 shrink-0" />
               {featureKeyMap[feature] ? t(featureKeyMap[feature]) : feature}
             </li>
           ))}
@@ -141,7 +143,7 @@ interface PaymentItemProps {
 
 function PaymentItem({ t, payment }: PaymentItemProps) {
   const isActive = payment.status === "Active"
-  const currencySymbol = payment.currency === "USD" ? "$" : ""
+  const currencySymbol = payment.currency === "USD" ? "" : ""
   const translatedStatus = statusKeyMap[payment.status] ? t(statusKeyMap[payment.status]) : payment.status
   const translatedPlan = planNameMap[payment.plan] ? t(planNameMap[payment.plan]) : payment.plan
 
@@ -204,6 +206,23 @@ export default function MembershipPage() {
   const [startDate, setStartDate] = useState("")
   const customer = useCustomerStore((state) => state.customer)
   const [packages, setPackages] = useState<IPackagesResponse[] | null>(null)
+  const [activeSlide, setActiveSlide] = useState(0)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  const handleScroll = useCallback(() => {
+    const el = carouselRef.current
+    if (!el) return
+    const scrollLeft = el.scrollLeft
+    const cardWidth = el.offsetWidth
+    const index = Math.round(scrollLeft / cardWidth)
+    setActiveSlide(index)
+  }, [])
+
+  const scrollToSlide = useCallback((index: number) => {
+    const el = carouselRef.current
+    if (!el) return
+    el.scrollTo({ left: index * el.offsetWidth, behavior: "smooth" })
+  }, [])
 
   const filter = MemberShipPaymentHistory()
   const membershipPaymentHistories = useFetchMemberShipPaymentHistory({ filter: filter.data })
@@ -261,17 +280,54 @@ export default function MembershipPage() {
         ) : (
           <CardContent className="p-0">
             {packages && packages.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-6">
-                {packages.map((plan) => (
-                  <PlanCard
-                    key={plan.id}
-                    plan={plan}
-                    t={t}
-                    onSelectPlan={handleSelectPlan}
-                    onRenewPlan={handleRenewPlan}
-                  />
-                ))}
-              </div>
+              <>
+                {/* Mobile carousel */}
+                <div className="md:hidden">
+                  <div
+                    ref={carouselRef}
+                    onScroll={handleScroll}
+                    className="flex overflow-x-auto snap-x snap-mandatory touch-pan-x"
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                  >
+                    {packages.map((plan) => (
+                      <div key={plan.id} className="snap-start shrink-0 w-full px-1">
+                        <PlanCard
+                          plan={plan}
+                          t={t}
+                          onSelectPlan={handleSelectPlan}
+                          onRenewPlan={handleRenewPlan}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {/* Dot pagination */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {packages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => scrollToSlide(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${activeSlide === index
+                          ? "bg-primary w-4"
+                          : "bg-muted-foreground/30"
+                          }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Desktop grid */}
+                <div className="hidden md:grid md:grid-cols-3 gap-6">
+                  {packages.map((plan) => (
+                    <PlanCard
+                      key={plan.id}
+                      plan={plan}
+                      t={t}
+                      onSelectPlan={handleSelectPlan}
+                      onRenewPlan={handleRenewPlan}
+                    />
+                  ))}
+                </div>
+              </>
             ) : (
               <EmptyPage
                 title={t("membership.no_packages")}
@@ -291,7 +347,7 @@ export default function MembershipPage() {
               <CreditCard className="h-4 w-4 mr-2" />
               {t("membership.payment_history")}
             </CardTitle>
-            <div className="w-1/2 flex items-center gap-4">
+            <div className="w-1/2 hidden sm:flex items-center gap-4">
               <div className="flex-1 relative">
                 <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input

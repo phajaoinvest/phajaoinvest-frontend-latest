@@ -11,9 +11,9 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <TrendingUp className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold">Phajaoinvest</span>
+            <Link href="/" className="flex items-center justify-start space-x-2">
+              <img src="/images/logo.png" alt="logo" width={28} height={36} />
+              <span className="text-md sm:text-lg font-bold text-white">Phajaoinvest</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               {t("footer.description")}

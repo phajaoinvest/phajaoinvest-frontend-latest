@@ -53,19 +53,10 @@ export function Header() {
         }`}
     >
       <div className="sm:container flex h-14 items-center">
-        <Link href="/" className="hidden sm:flex items-center space-x-2">
-          <TrendingUp className="h-6 w-6 text-yellow-600" />
-          <span className="text-lg font-bold text-white">Phajaoinvest</span>
+        <Link href="/" className="flex items-center justify-center space-x-2">
+          <img src="/images/logo.png" alt="logo" width={28} height={36} />
+          <span className="text-md sm:text-lg font-bold text-white">Phajaoinvest</span>
         </Link>
-
-        <Button
-          variant="outline"
-          size="sm"
-          className="md:hidden text-white border-white/30 hover:bg-yellow-600"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </Button>
 
         <nav className="hidden md:flex ml-8 space-x-6">
           {navLinks.map(({ href, label }) => {
@@ -87,6 +78,15 @@ export function Header() {
 
         <div className="ml-auto flex items-center space-x-2 sm:space-x-4">
           <LanguageSwitcher />
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="md:hidden text-white border-white/30 hover:bg-yellow-600"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </Button>
 
           <div className="hidden md:flex space-x-2">
             {customer ? (
