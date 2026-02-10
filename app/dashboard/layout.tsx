@@ -130,7 +130,7 @@ export default function DashboardLayout({
       </main>
 
       {/* Bottom navigation (visible only on small screens) */}
-      <nav className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden justify-around items-center bg-white border-t border-gray-200 shadow-lg py-2 md:py-4">
+      <nav className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden justify-around items-center bg-white border-t border-gray-200 shadow-lg py-2 md:py-4" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
         {mobileSidebarItems.map((item, index) => {
           const IconComponent = item.icon
           const isActive = pathname === item.href
