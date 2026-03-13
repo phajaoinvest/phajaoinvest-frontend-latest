@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
 
 import { useCustomerStore } from "@/app/store/useCustomerStore"
+import { RedeemCouponModal } from "@/components/redeem-coupon-modal"
+import { Ticket } from "lucide-react"
 
 export function Header() {
   const { t } = useTranslation()
@@ -25,6 +27,7 @@ export function Header() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isRedeemModalOpen, setIsRedeemModalOpen] = useState(false)
   const customer = useCustomerStore((state) => state.customer);
 
   console.log("User:::", user)
@@ -106,7 +109,14 @@ export function Header() {
                   <DropdownMenuItem asChild>
                     <Link href="/dashboard">{t("header.dashboard")}</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={logout}>{t("header.sign_out")}</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setIsRedeemModalOpen(true)} className="cursor-pointer">
+                    <Ticket className="h-4 w-4 mr-2" />
+                    <span>{t("membership.coupon_title")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    {t("header.sign_out")}
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
@@ -160,10 +170,14 @@ export function Header() {
             })}
 
             <div className="flex flex-col space-y-2 pt-2">
-              {user ? (
+              {customer ? (
                 <>
                   <Button variant="ghost" size="sm" asChild>
                     <Link href="/dashboard">{t("header.dashboard")}</Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={() => setIsRedeemModalOpen(true)}>
+                    <Ticket className="h-4 w-4 mr-2" />
+                    {t("membership.coupon_title")}
                   </Button>
                   <Button variant="ghost" size="sm" onClick={logout}>
                     {t("header.sign_out")}
@@ -188,6 +202,11 @@ export function Header() {
           </nav>
         </div>
       )}
+
+      <RedeemCouponModal
+        isOpen={isRedeemModalOpen}
+        onClose={() => setIsRedeemModalOpen(false)}
+      />
     </header>
   )
 }

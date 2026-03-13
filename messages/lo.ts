@@ -590,6 +590,12 @@ export const laos = {
 
   // Membership page
   "membership.title": "ແພັກເກັດສະມາຊິກ",
+  "membership.coupon_title": "ແລກຄູປອງ",
+  "membership.coupon_description": "ມີລະຫັດສ່ວນຫຼຸດບໍ? ປ້ອນລະຫັດຂ້າງລຸ່ມນີ້ເພື່ອແລກຮັບສະມາຊິກພຣີມຽມຂອງທ່ານ.",
+  "membership.coupon_placeholder": "ປ້ອນລະຫັດຄູປອງ",
+  "membership.coupon_button": "ແລກຄູປອງດຽວນີ້",
+  "membership.coupon_success": "ແລກຄູປອງສຳເລັດແລ້ວ! ສະມາຊິກພຣີມຽມຂອງທ່ານຖືກເປີດໃຊ້ແລ້ວ.",
+  "membership.coupon_error": "ບໍ່ສາມາດແລກຄູປອງໄດ້. ກະລຸນາກວດສອບລະຫັດ ແລະ ລອງໃໝ່ອີກຄັ້ງ.",
   "membership.subtitle": "ອັບເກຣດ ຫຼື ປ່ຽນແພັກເກັດສະມາຊິກຂອງທ່ານ",
   "membership.loading": "ກຳລັງໂຫຼດ...",
   "membership.under_review": "ແພັກເກັດຂອງທ່ານກຳລັງກວດສອບ",

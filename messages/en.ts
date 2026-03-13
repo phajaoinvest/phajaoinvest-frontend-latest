@@ -1222,6 +1222,12 @@ export const english = {
 
   // Membership page
   "membership.title": "Membership Plans",
+  "membership.coupon_title": "Redeem Coupon",
+  "membership.coupon_description": "Have a discount code? Enter it below to redeem your premium membership.",
+  "membership.coupon_placeholder": "Enter coupon code",
+  "membership.coupon_button": "Redeem Now",
+  "membership.coupon_success": "Coupon redeemed successfully! Your premium membership is now active.",
+  "membership.coupon_error": "Failed to redeem coupon. Please check the code and try again.",
   "membership.subtitle": "Upgrade or change your membership plan",
   "membership.loading": "Loading...",
   "membership.under_review": "Your plan is under review",

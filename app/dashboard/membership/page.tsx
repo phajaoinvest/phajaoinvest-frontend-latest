@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react"
 import { useRouter } from "next/navigation"
-import { Crown, CreditCard, Calendar, Loader } from "lucide-react"
+import { Crown, CreditCard, Calendar, Loader, Ticket } from "lucide-react"
 
 // components
 import { Input } from "@/components/ui/input"
@@ -13,7 +13,8 @@ import Pagination from "@/components/ui/pagination"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 // API, hooks, store
-import { queryData } from "@/app/api/api"
+import { queryData, postAPI } from "@/app/api/api"
+import { useToast } from "@/app/utils/toast"
 import { useTranslation } from "@/lib/i18n"
 import MemberShipPaymentHistory from "./hooks/useFilter"
 import type { IPackagesResponse } from "@/interfaces/package"
@@ -233,24 +234,55 @@ export default function MembershipPage() {
     }
   }, [customer, router])
 
-  useEffect(() => {
-    const fetchPackages = async () => {
-      try {
-        setLoading(true)
-        const res = await queryData({ url: "/subscription-packages" })
+  const { errorMessage, successMessage } = useToast()
+  const [couponCode, setCouponCode] = useState("")
+  const [isRedeeming, setIsRedeeming] = useState(false)
 
-        if (res.data.length > 0) {
-          setPackages(res.data)
-        }
-      } catch (error) {
-        console.error("Fetch packages failed:", error)
-      } finally {
-        setLoading(false)
+  const fetchPackages = useCallback(async () => {
+    try {
+      setLoading(true)
+      const res = await queryData({ url: "/subscription-packages" })
+
+      if (res.data.length > 0) {
+        setPackages(res.data)
       }
+    } catch (error) {
+      console.error("Fetch packages failed:", error)
+    } finally {
+      setLoading(false)
     }
-
-    fetchPackages()
   }, [])
+
+  useEffect(() => {
+    fetchPackages()
+  }, [fetchPackages])
+
+  const handleRedeemCoupon = async () => {
+    if (!couponCode.trim()) return
+
+    try {
+      setIsRedeeming(true)
+      const res = await postAPI({
+        url: "/customers/services/premium-membership/redeem-coupon",
+        body: { code: couponCode.trim() }
+      })
+
+      if (!res.is_error) {
+        successMessage(t("membership.coupon_success"), 5000)
+        setCouponCode("")
+        // Refresh packages and payment history
+        fetchPackages()
+        membershipPaymentHistories.fetchData()
+      } else {
+        errorMessage(res.message || t("membership.coupon_error"), 5000)
+      }
+    } catch (error: any) {
+      console.error("Redeem coupon failed:", error)
+      errorMessage(error?.response?.data?.message || t("membership.coupon_error"), 5000)
+    } finally {
+      setIsRedeeming(false)
+    }
+  }
 
   const handleSelectPlan = (plan: IPackagesResponse) => {
     if (!plan.is_current) {
@@ -335,7 +367,59 @@ export default function MembershipPage() {
               />
             )}
           </CardContent>
-        )}
+      )}
+    </Card>
+    <hr />
+
+      <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-900 dark:to-gray-800/50 relative">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <Ticket className="h-24 w-24 rotate-12" />
+        </div>
+        
+        <CardContent className="p-6 sm:p-8 relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="space-y-2 max-w-md">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <Ticket className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-lg font-bold tracking-tight">{t("membership.coupon_title")}</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {t("membership.coupon_description")}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 w-full lg:max-w-md">
+              <div className="relative flex-grow">
+                <Input
+                  placeholder={t("membership.coupon_placeholder")}
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  disabled={isRedeeming}
+                  className="pl-4 pr-10 py-6 bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800 focus:ring-2 focus:ring-primary/20 transition-all text-base"
+                />
+                {!couponCode && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/40">
+                    <Crown className="h-4 w-4" />
+                  </div>
+                )}
+              </div>
+              <Button
+                onClick={handleRedeemCoupon}
+                disabled={isRedeeming || !couponCode.trim()}
+                className="py-6 px-8 font-semibold shadow-md active:scale-95 transition-transform whitespace-nowrap"
+              >
+                {isRedeeming ? (
+                  <Loader className="h-4 w-4 animate-spin mr-2" />
+                ) : (
+                  <Crown className="h-4 w-4 mr-2" />
+                )}
+                {t("membership.coupon_button")}
+              </Button>
+            </div>
+          </div>
+        </CardContent>
       </Card>
 
       <hr />

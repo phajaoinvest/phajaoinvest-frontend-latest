@@ -53,7 +53,7 @@ const useFetchMemberShipPaymentHistory = ({
     fetchMemberShipTransactionHistory();
   }, [filter]);
 
-  return { data, total, loading, error };
+  return { data, total, loading, error, fetchData: fetchMemberShipTransactionHistory };
 };
 
 export { useFetchMemberShipPaymentHistory };

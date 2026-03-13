@@ -590,6 +590,12 @@ export const thai = {
 
   // Membership page
   "membership.title": "แพ็กเกจสมาชิก",
+  "membership.coupon_title": "ใช้คูปอง",
+  "membership.coupon_description": "มีรหัสส่วนลดหรือไม่? กรอกรหัสด้านล่างเพื่อเปิดใช้งานสมาชิกพรีเมียมของคุณ",
+  "membership.coupon_placeholder": "กรอกรหัสคูปอง",
+  "membership.coupon_button": "ใช้คูปองตอนนี้",
+  "membership.coupon_success": "ใช้คูปองสำเร็จแล้ว! สมาชิกพรีเมียมของคุณถูกเปิดใช้งานแล้ว",
+  "membership.coupon_error": "ไม่สามารถใช้คูปองได้ โปรดตรวจสอบรหัสและลองใหม่อีกครั้ง",
   "membership.subtitle": "อัปเกรดหรือเปลี่ยนแพ็กเกจสมาชิกของคุณ",
   "membership.loading": "กำลังโหลด...",
   "membership.under_review": "แพ็กเกจของคุณกำลังตรวจสอบ",
