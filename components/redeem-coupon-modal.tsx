@@ -41,7 +41,7 @@ export function RedeemCouponModal({ isOpen, onClose }: RedeemCouponModalProps) {
         setCouponCode("")
         onClose()
         // Optionally refresh the page or state if needed
-        window.location.reload()
+        // window.location.reload()
       } else {
         errorMessage(res.message || t("membership.coupon_error"), 5000)
       }
@@ -62,7 +62,7 @@ export function RedeemCouponModal({ isOpen, onClose }: RedeemCouponModalProps) {
         <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
           <Sparkles className="h-32 w-32 rotate-12 text-primary" />
         </div>
-        
+
         <DialogHeader className="relative z-10">
           <div className="flex items-center gap-3 mb-2">
             <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/20 shadow-inner">
