@@ -109,23 +109,40 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
           url: `/technical-indicators/${symbol}/price-history?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&adjusted=true&limit=50000&multiplier=1`,
         })
 
-        if (!result.is_error && result.data) {
+        if (!result.is_error && result.data && Array.isArray(result.data)) {
           // Filter data based on the actual period requested
-          let filteredData = result.data
+          let filteredData = [...result.data] // Create copy
 
           if (selectedPeriod === "1D") {
             // Only show last 24 hours of data
             const oneDayAgo = new Date()
             oneDayAgo.setDate(oneDayAgo.getDate() - 1)
-            filteredData = result.data.filter((item: PriceData) => item.t >= oneDayAgo.getTime())
+            const subset = result.data.filter((item: PriceData) => item.t >= oneDayAgo.getTime())
+            // Fallback: if EOD data, 24h might be empty on weekends. Show latest 2 bars.
+            filteredData = subset.length > 0 ? subset : result.data.slice(-2)
           } else if (selectedPeriod === "5D") {
             // Only show last 5 days of data
             const fiveDaysAgo = new Date()
             fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5)
-            filteredData = result.data.filter((item: PriceData) => item.t >= fiveDaysAgo.getTime())
+            const subset = result.data.filter((item: PriceData) => item.t >= fiveDaysAgo.getTime())
+            // Fallback: show latest 5 bars
+            filteredData = subset.length > 5 ? subset : result.data.slice(-5)
           }
 
+          if (filteredData.length === 0 && result.data.length > 0) {
+            filteredData = [result.data[result.data.length - 1]]
+          }
+
+          console.log(`Chart Data (${symbol}, ${selectedPeriod}):`, {
+            rawCount: result.data.length,
+            filteredCount: filteredData.length,
+            latestDate: filteredData.length > 0 ? new Date(filteredData[filteredData.length - 1].t).toLocaleDateString() : 'N/A'
+          })
+
           setData(filteredData)
+        } else {
+          console.error(`Chart API returned error or no data for ${symbol}:`, result)
+          setData([])
         }
       } catch (error) {
         console.error("Error fetching price history:", error)
@@ -137,10 +154,7 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
     fetchPriceHistory()
   }, [selectedPeriod, symbol])
 
-  // Update data when initialData changes
-  useEffect(() => {
-    setData(initialData)
-  }, [initialData])
+  // Synchronization effect removed to prevent overwriting internal fetch data
 
   // Fetch performance for all periods in a single call
   useEffect(() => {
