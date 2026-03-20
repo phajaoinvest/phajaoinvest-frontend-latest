@@ -412,6 +412,8 @@ export default function StockResultPage() {
                   const datasetLabel = context.dataset.label || ''
                   const value = context.parsed.y
 
+                  if (value === null || value === undefined) return `${datasetLabel}: N/A`
+
                   if (context.datasetIndex === 0) {
                     // Bar chart - format as currency
                     const formatted = value >= 1e9
@@ -420,7 +422,7 @@ export default function StockResultPage() {
                     return `${datasetLabel}: ${formatted}`
                   } else {
                     // Line chart - format as percentage
-                    return `YoY: ${value >= 0 ? '+' : ''}${value.toFixed(1)}%`
+                    return `YoY: ${value >= 0 ? '+' : ''}${Number(value).toFixed(1)}%`
                   }
                 },
               },
@@ -597,13 +599,16 @@ export default function StockResultPage() {
                       </div>
                     </div>
                     {(() => {
+                      if (!performanceData.entries || performanceData.entries.length === 0) return <p className="text-slate-500">N/A</p>
                       const best = performanceData.entries.reduce((max: any, entry: any) =>
-                        entry.changePercent > max.changePercent ? entry : max
+                        (entry.changePercent || 0) > (max.changePercent || 0) ? entry : max,
+                        performanceData.entries[0]
                       )
+                      const changeStr = best.changePercent !== null ? `+${best.changePercent.toFixed(2)}%` : "N/A"
                       return (
                         <div className="flex items-start justify-start gap-2">
                           <p className="text-md font-black text-green-500 mb-2">
-                            +{best.changePercent.toFixed(2)}%
+                            {changeStr}
                           </p>
                           <div className="flex items-center gap-2">
                             <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-bold">
@@ -629,14 +634,17 @@ export default function StockResultPage() {
                       </div>
                     </div>
                     {(() => {
+                      if (!performanceData.entries || performanceData.entries.length === 0) return <p className="text-slate-500">N/A</p>
                       const worst = performanceData.entries.reduce((min: any, entry: any) =>
-                        entry.changePercent < min.changePercent ? entry : min
+                        (entry.changePercent || 0) < (min.changePercent || 0) ? entry : min,
+                        performanceData.entries[0]
                       )
-                      const isPositive = worst.changePercent >= 0
+                      const isPositive = (worst.changePercent || 0) >= 0
+                      const changeStr = worst.changePercent !== null ? `${isPositive ? '+' : ''}${worst.changePercent.toFixed(2)}%` : "N/A"
                       return (
                         <div className="flex items-start justify-start gap-2">
                           <p className={`text-md font-black mb-2 ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
-                            {isPositive ? '+' : ''}{worst.changePercent.toFixed(2)}%
+                            {changeStr}
                           </p>
                           <div className="flex items-center gap-2">
                             <span className={`px-2 py-1 rounded-full text-xs font-bold ${isPositive ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
@@ -662,9 +670,12 @@ export default function StockResultPage() {
                       </div>
                     </div>
                     {(() => {
-                      const avg = performanceData.entries.reduce((sum: number, entry: any) =>
+                      if (!performanceData.entries || performanceData.entries.length === 0) return <p className="text-slate-500">N/A</p>
+                      const validEntries = performanceData.entries.filter((e: any) => e.changePercent !== null)
+                      if (validEntries.length === 0) return <p className="text-slate-500">N/A</p>
+                      const avg = validEntries.reduce((sum: number, entry: any) =>
                         sum + entry.changePercent, 0
-                      ) / performanceData.entries.length
+                      ) / validEntries.length
                       const isPositive = avg >= 0
                       return (
                         <div className="flex items-start justify-start gap-2">
@@ -673,7 +684,7 @@ export default function StockResultPage() {
                           </p>
                           <div className="flex items-center gap-2">
                             <span className="px-2 py-1 bg-slate-700/50 text-slate-300 rounded-full text-xs font-bold">
-                              {performanceData.entries.length} {t("stock_result.periods")}
+                              {validEntries.length} {t("stock_result.periods")}
                             </span>
                           </div>
                         </div>
@@ -747,7 +758,7 @@ export default function StockResultPage() {
 
                           <td className="px-4 py-4 text-right">
                             <div className={`text-sm font-bold ${isPositive ? 'text-green-500' : 'text-red-500'}`}>
-                              {isPositive ? '+' : '-'}{changeValue.toFixed(2)}%
+                              {entry.changePercent !== null ? `${isPositive ? '+' : '-'}${changeValue.toFixed(2)}%` : 'N/A'}
                             </div>
                           </td>
 
