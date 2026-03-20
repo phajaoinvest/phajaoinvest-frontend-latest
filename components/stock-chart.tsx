@@ -15,11 +15,11 @@ interface PriceData {
 }
 
 interface StockChartProps {
-  data: PriceData[]
+  data?: PriceData[]
   symbol: string
 }
 
-export default function StockChart({ data: initialData, symbol }: StockChartProps) {
+export default function StockChart({ data: initialData = [], symbol }: StockChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [selectedPeriod, setSelectedPeriod] = useState("1M")
@@ -142,82 +142,32 @@ export default function StockChart({ data: initialData, symbol }: StockChartProp
     setData(initialData)
   }, [initialData])
 
-  // Calculate performance for all periods
+  // Fetch performance for all periods in a single call
   useEffect(() => {
-    const calculateAllPeriodPerformances = async () => {
-      const performances: Record<string, string> = {}
-      const periods = ["5D", "1M", "6M", "YTD", "1Y", "5Y", "ALL"]
+    const fetchAllPeriodPerformances = async () => {
+      try {
+        const result = await queryData({
+          url: `/technical-indicators/${symbol}/performance`,
+        })
 
-      for (const period of periods) {
-        try {
-          const endDate = new Date()
-          const startDate = new Date()
-
-          switch (period) {
-            case "5D":
-              startDate.setDate(startDate.getDate() - 7)
-              break
-            case "1M":
-              startDate.setMonth(startDate.getMonth() - 1)
-              break
-            case "6M":
-              startDate.setMonth(startDate.getMonth() - 6)
-              break
-            case "YTD":
-              startDate.setMonth(0)
-              startDate.setDate(1)
-              break
-            case "1Y":
-              startDate.setFullYear(startDate.getFullYear() - 1)
-              break
-            case "5Y":
-              startDate.setFullYear(startDate.getFullYear() - 5)
-              break
-            case "ALL":
-              startDate.setFullYear(startDate.getFullYear() - 20)
-              break
-          }
-
-          const formatDate = (date: Date) => {
-            return date.toISOString().split("T")[0]
-          }
-
-          const result = await queryData({
-            url: `/technical-indicators/${symbol}/price-history?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&adjusted=true&limit=50000&multiplier=1`,
-          })
-
-          if (!result.is_error && result.data && result.data.length > 0) {
-            let periodData = result.data
-
-            if (period === "5D") {
-              const fiveDaysAgo = new Date()
-              fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5)
-              periodData = result.data.filter((item: PriceData) => item.t >= fiveDaysAgo.getTime())
-            }
-
-            if (periodData.length > 0) {
-              const firstPrice = periodData[0].c
-              const lastPrice = periodData[periodData.length - 1].c
-              const change = lastPrice - firstPrice
-              const changePercent = ((change / firstPrice) * 100).toFixed(2)
-              performances[period] = `${changePercent}%`
+        if (!result.is_error && result.data && result.data.entries) {
+          const performances: Record<string, string> = {}
+          result.data.entries.forEach((entry: any) => {
+            if (entry.changePercent !== null) {
+              performances[entry.timeframe] = `${entry.changePercent}%`
             } else {
-              performances[period] = "N/A"
+              performances[entry.timeframe] = "N/A"
             }
-          } else {
-            performances[period] = "N/A"
-          }
-        } catch (error) {
-          console.error(`Error calculating ${period} performance:`, error)
-          performances[period] = "N/A"
+          })
+          setPeriodPerformances(performances)
         }
+      } catch (error) {
+        console.error("Error fetching performance summary:", error)
       }
-
-      setPeriodPerformances(performances)
     }
 
     if (symbol) {
-      calculateAllPeriodPerformances()
+      fetchAllPeriodPerformances()
     }
   }, [symbol])
 

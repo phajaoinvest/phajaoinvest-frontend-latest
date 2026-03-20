@@ -120,8 +120,6 @@ export default function StockResultPage() {
   const [newsLoading, setNewsLoading] = useState(true)
   const [overviewData, setOverviewData] = useState<any>(null)
   const [overviewLoading, setOverviewLoading] = useState(true)
-  const [priceHistoryData, setPriceHistoryData] = useState<any[]>([])
-  const [priceHistoryLoading, setPriceHistoryLoading] = useState(true)
   const [performanceData, setPerformanceData] = useState<any>(null)
   const [performanceLoading, setPerformanceLoading] = useState(true)
   const [financialData, setFinancialData] = useState<any>(null)
@@ -130,6 +128,20 @@ export default function StockResultPage() {
   const [selectedTimeframe, setSelectedTimeframe] = useState("annual")
 
   const symbol = params.symbol as string
+
+  useEffect(() => {
+    if (symbol) {
+      setOverviewData(null)
+      setNewsData([])
+      setPerformanceData(null)
+      setFinancialData(null)
+      setLoading(true)
+      setOverviewLoading(true)
+      setNewsLoading(true)
+      setPerformanceLoading(true)
+      setFinancialLoading(true)
+    }
+  }, [symbol])
 
   useEffect(() => {
     // Simulate API call to fetch stock data
@@ -148,7 +160,7 @@ export default function StockResultPage() {
   }, [symbol])
 
   useEffect(() => {
-    if (activeAnalysis !== "news") return;
+    if (activeAnalysis !== "news" || newsData.length > 0) return;
     const fetchNews = async () => {
       setNewsLoading(true);
       try {
@@ -166,7 +178,7 @@ export default function StockResultPage() {
   }, [symbol, activeAnalysis]);
 
   useEffect(() => {
-    if (activeAnalysis !== "summary") return;
+    if (activeAnalysis !== "summary" || overviewData) return;
     const fetchOverview = async () => {
       setOverviewLoading(true);
       try {
@@ -183,38 +195,9 @@ export default function StockResultPage() {
     if (symbol) fetchOverview();
   }, [symbol, activeAnalysis]);
 
-  useEffect(() => {
-    if (activeAnalysis !== "summary") return;
-    const fetchPriceHistory = async () => {
-      setPriceHistoryLoading(true);
-      try {
-        // Calculate date range (last 30 days)
-        const endDate = new Date();
-        const startDate = new Date();
-        startDate.setDate(startDate.getDate() - 30);
-
-        const formatDate = (date: Date) => {
-          return date.toISOString().split('T')[0];
-        };
-
-        const result = await queryData({
-          url: `/technical-indicators/${symbol}/price-history?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&adjusted=true&limit=50000&multiplier=1`
-        });
-
-        if (!result.is_error && result.data) {
-          setPriceHistoryData(result.data);
-        }
-      } catch (error) {
-        console.error("Error fetching price history:", error);
-      } finally {
-        setPriceHistoryLoading(false);
-      }
-    };
-    if (symbol) fetchPriceHistory();
-  }, [symbol, activeAnalysis]);
 
   useEffect(() => {
-    if (activeAnalysis !== "returns") return;
+    if (activeAnalysis !== "returns" || performanceData) return;
     const fetchPerformance = async () => {
       setPerformanceLoading(true);
       try {
@@ -232,7 +215,7 @@ export default function StockResultPage() {
   }, [symbol, activeAnalysis]);
 
   useEffect(() => {
-    if (activeAnalysis !== "financial") return;
+    if (activeAnalysis !== "financial" || (financialData && financialData.metadata.timeframe === selectedTimeframe)) return;
     const fetchFinancialData = async () => {
       setFinancialLoading(true);
       try {
@@ -261,7 +244,7 @@ export default function StockResultPage() {
   const renderAnalysisContent = () => {
     switch (activeAnalysis) {
       case "summary":
-        if (overviewLoading || priceHistoryLoading) {
+        if (overviewLoading) {
           return (
             <div className="h-full flex items-center justify-center gap-2">
               <Loader className="animate-spin" size={16} />
@@ -329,7 +312,7 @@ export default function StockResultPage() {
 
               <div className="w-full sm:w-4/5 space-y-2">
                 <div className="mt-6">
-                  <StockChart data={priceHistoryData} symbol={symbol} />
+                  <StockChart symbol={symbol} />
                 </div>
               </div>
             </div>
@@ -872,80 +855,7 @@ export default function StockResultPage() {
           </div>
         );
       default:
-        if (overviewLoading || priceHistoryLoading) {
-          return (
-            <div className="h-full flex items-center justify-center gap-2">
-              <Loader className="animate-spin" size={16} />
-              <p className="text-slate-300">Loading overview...</p>
-            </div>
-          );
-        }
-        return (
-          <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row items-start justify-start gap-6">
-              <div className="w-full sm:w-1/5 space-y-2">
-                <h4 className="text-sm font-bold text-slate-300 mb-3">{t("stock_result.stock_overview_retrieved")}</h4>
-                <ul className="text-sm text-slate-300 space-y-3 pl-2">
-                  <li><span className="text-gray-400">{t("stock_result.stock_symbol")}:</span> {overviewData?.symbol || symbol}</li>
-                  <li><span className="text-gray-400">{t("stock_result.company_name")}:</span> {overviewData?.companyName || "N/A"}</li>
-                  <li><span className="text-gray-400">{t("stock_result.last_price")}:</span> {overviewData?.price || "N/A"}</li>
-                  <li><span className="text-gray-400">{t("stock_result.change_percent")}:</span> {isPositive(overviewData?.changePercent || 0) ? <span className="text-green-500">{overviewData?.changePercent}%</span> : <span className="text-red-500">{overviewData?.changePercent}%</span>}</li>
-                  {overviewData?.group && <li><span className="text-gray-400">{t("stock_result.group")}:</span> <span className="py-1 px-2 rounded-md bg-primary text-black text-xs">{overviewData.group}</span></li>}
-                  <li><span className="text-gray-400">{t("stock_result.updated_at")}:</span> {overviewData?.metadata?.timestamp ? formatDateDDMMYYYY(overviewData.metadata.timestamp) : "N/A"}</li>
-                  <Separator />
-                  <li className="text-green-500"><span className="text-gray-400">{t("stock_result.support_level_1")}</span> {formatUSD(overviewData?.supportLevel)}</li>
-                  <li className="text-green-500"><span className="text-gray-400">{t("stock_result.support_level_2")}:</span> {formatUSD(overviewData?.supportLevelSecondary)}</li>
-                  <li className="text-red-500"><span className="text-gray-400">{t("stock_result.resistance_01")}:</span> {formatUSD(overviewData?.resistance1)}</li>
-                  <li className="text-red-500"><span className="text-gray-400">{t("stock_result.resistance_02")}:</span> {formatUSD(overviewData?.resistance2)}</li>
-                  <li><span className="text-gray-400">{t("stock_result.relative_strength_index")}:</span> {overviewData?.rsi > 30 ?
-                    <span className="text-red-500">{overviewData?.rsi}</span>
-                    :
-                    <span className="text-green-500">{overviewData?.rsi}</span>}</li>
-                </ul>
-                <Separator />
-                <br />
-                <div className="flex items-center justify-between gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="text-xs w-full bg-transparent hover:bg-slate-800/50  text-slate-200 font-medium rounded-md border hover:border-primary transition-all duration-200"
-                  >
-                    Company Info
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="text-xs w-full bg-transparent hover:bg-slate-800/50 text-slate-200 font-medium rounded-md transition-all duration-200 border hover:border-primary"
-                    onClick={() => router.push("/favorite-stocks")}
-                  >
-                    Quanterly Report
-                  </Button>
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="text-xs w-full bg-transparent hover:bg-slate-800/50  text-slate-200 font-medium rounded-md border hover:border-primary transition-all duration-200"
-                  >
-                    Add to Favorites
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="text-xs w-full bg-transparent hover:bg-slate-800/50 text-slate-200 font-medium rounded-md transition-all duration-200 border hover:border-primary"
-                    onClick={() => router.push("/favorite-stocks")}
-                  >
-                    My Favorite Stocks
-                  </Button>
-                </div>
-              </div>
-
-              <div className="w-full sm:w-4/5 space-y-2">
-                <div className="mt-6">
-                  <StockChart data={priceHistoryData} symbol={symbol} />
-                </div>
-              </div>
-            </div>
-          </div>
-        )
+        return null;
     }
   }
 
@@ -964,24 +874,24 @@ export default function StockResultPage() {
     )
   }
 
-  if (!stockData) {
-    return (
-      <>
-        <Header />
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-white mb-4">Stock Not Found</h1>
-            <p className="text-slate-300 mb-6">The stock symbol "{symbol}" was not found.</p>
-            <Button onClick={() => router.back()} className="bg-amber-500 hover:bg-amber-600 text-black">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Go Back
-            </Button>
-          </div>
-        </div>
-        <Footer />
-      </>
-    )
-  }
+  // if (!stockData) {
+  //   return (
+  //     <>
+  //       <Header />
+  //       <div className="min-h-screen flex items-center justify-center">
+  //         <div className="text-center">
+  //           <h1 className="text-2xl font-bold text-white mb-4">Stock Not Found</h1>
+  //           <p className="text-slate-300 mb-6">The stock symbol "{symbol}" was not found.</p>
+  //           <Button onClick={() => router.back()} className="bg-amber-500 hover:bg-amber-600 text-black">
+  //             <ArrowLeft className="h-4 w-4 mr-2" />
+  //             Go Back
+  //           </Button>
+  //         </div>
+  //       </div>
+  //       <Footer />
+  //     </>
+  //   )
+  // }
 
   return (
     <>
