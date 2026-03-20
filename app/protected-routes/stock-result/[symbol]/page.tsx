@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { ArrowLeft, TrendingUp, Building2, Calendar, DollarSign, Newspaper, ChevronRight, Loader, ExternalLink } from "lucide-react"
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js'
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, Filler, BarController, LineController } from 'chart.js'
 import { Chart } from 'react-chartjs-2'
 
 // Register ChartJS components
-ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, Filler)
+ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, Filler, BarController, LineController)
 
 // components:
 import Header from "@/components/header"
@@ -485,7 +485,7 @@ export default function StockResultPage() {
               <div>
                 <h3 className="text-2xl font-bold text-white mb-1">{t("stock_result.income_statement")}</h3>
                 <p className="text-sm text-slate-400">
-                  {financialData.companyName} ({financialData.symbol})
+                  {financialData.companyName || symbol} ({financialData.symbol || symbol})
                 </p>
               </div>
 
@@ -766,12 +766,12 @@ export default function StockResultPage() {
                             <div className="flex items-center gap-1">
                               <div className="flex items-center gap-2 text-xs text-slate-400">
                                 <Calendar className="h-3 w-3" />
-                                <span>{formatDateDDMMYYYY(entry.startDate)}</span>
+                                <span>{entry.startDate ? formatDateDDMMYYYY(entry.startDate) : 'N/A'}</span>
                               </div>
                               <ChevronRight className="h-3 w-3 text-white" />
                               <div className="flex items-center gap-2 text-xs text-slate-400">
                                 <Calendar className="h-3 w-3" />
-                                <span>{formatDateDDMMYYYY(entry.endDate)}</span>
+                                <span>{entry.endDate ? formatDateDDMMYYYY(entry.endDate) : 'N/A'}</span>
                               </div>
                             </div>
                           </td>
