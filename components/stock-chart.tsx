@@ -157,6 +157,8 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
   // Synchronization effect removed to prevent overwriting internal fetch data
 
   // Fetch performance for all periods in a single call
+  // Removed to prevent premature API rate-limiting on Overview tab.
+  /*
   useEffect(() => {
     const fetchAllPeriodPerformances = async () => {
       try {
@@ -184,6 +186,7 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
       fetchAllPeriodPerformances()
     }
   }, [symbol])
+  */
 
   // Handle mouse move for tooltip
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -506,12 +509,13 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
                 } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               <span className="text-sm text-slate-400 mb-1">{period.label}</span>
-              <span
-                className={`text-sm font-semibold ${value === "N/A" ? "text-slate-500" : isPositive ? "text-green-500" : "text-red-500"
-                  }`}
-              >
-                {value}
-              </span>
+              {value !== "N/A" && (
+                <span
+                  className={`text-sm font-semibold mt-1 ${isPositive ? "text-green-500" : "text-red-500"}`}
+                >
+                  {value}
+                </span>
+              )}
             </button>
           )
         })}
