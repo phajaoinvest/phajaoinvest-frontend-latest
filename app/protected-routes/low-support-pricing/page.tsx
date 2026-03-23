@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import { useTranslation } from "@/lib/i18n"
 import { useState, useEffect } from "react"
 import { ArrowLeft, TrendingDown } from "lucide-react"
+import { queryData } from "@/app/api/api"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -77,8 +78,7 @@ export default function LowSupportPricingPage() {
         setLoading(true)
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/technical-indicators/market-movers/us-losers/breaking-support?minDropPercent=0.5&tolerancePercent=8&limit=${limit}`)
-      const result = await response.json()
+      const result = await queryData({ url: `/technical-indicators/market-movers/us-losers/breaking-support?minDropPercent=0.5&tolerancePercent=8&limit=${limit}` })
 
       if (!result.is_error && result.data) {
         if (append) {

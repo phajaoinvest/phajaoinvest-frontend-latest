@@ -24,6 +24,14 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
   const containerRef = useRef<HTMLDivElement>(null)
   const [selectedPeriod, setSelectedPeriod] = useState("1M")
   const [data, setData] = useState<PriceData[]>(initialData)
+  const [windowSize, setWindowSize] = useState([0, 0])
+
+  // Update canvas on resize
+  useEffect(() => {
+    const handleResize = () => setWindowSize([window.innerWidth, window.innerHeight])
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
   const [loading, setLoading] = useState(false)
   const [tooltip, setTooltip] = useState<{
     visible: boolean
@@ -419,7 +427,7 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
       ctx.fillStyle = stats?.isPositive ? "rgb(34, 197, 94)" : "rgb(239, 68, 68)"
       ctx.fill()
     }
-  }, [data, stats, hoverPoint])
+  }, [data, stats, hoverPoint, windowSize])
 
   // Get period performance from pre-calculated values
   const getPeriodPerformance = (periodKey: string) => {

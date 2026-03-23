@@ -3,6 +3,7 @@ import { useTranslation } from "@/lib/i18n"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import { ArrowLeft, TrendingUp, TrendingDown, Lock, ArrowRight } from "lucide-react"
+import { queryData } from "@/app/api/api"
 
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
@@ -49,8 +50,7 @@ export default function TopGainersLosersPage() {
     const fetchMarketMovers = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/technical-indicators/market-movers/all-us-stocks`)
-        const result = await response.json()
+        const result = await queryData({ url: '/technical-indicators/market-movers/all-us-stocks' })
 
         if (!result.is_error && result.data) {
           setMarketData(result.data)

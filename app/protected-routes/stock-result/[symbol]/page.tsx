@@ -912,7 +912,7 @@ export default function StockResultPage() {
           <div className="space-y-4">
             <div className="sticky top-16 z-10 bg-black py-4 rounded-md px-2 sm:px-0">
               <Tabs value={activeAnalysis} onValueChange={setActiveAnalysis} className="w-full">
-                <TabsList className="flex h-auto w-full bg-transparent gap-2 p-0 overflow-x-scroll">
+                <TabsList className="flex h-auto w-full bg-transparent gap-2 p-0 overflow-x-auto sm:overflow-visible pb-2 sm:pb-0 scrollbar-hide">
                   {analysisButtons.map((button) => {
                     const IconComponent = button.icon
                     return (

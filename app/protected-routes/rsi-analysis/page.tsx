@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation"
 import { useTranslation } from "@/lib/i18n"
 import { useState, useEffect } from "react"
 import { TrendingUp, TrendingDown, ShoppingCart, ArrowLeft } from "lucide-react"
+import { queryData } from "@/app/api/api"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -65,8 +66,7 @@ export default function RSIAnalysisPage() {
         setLoading(true)
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/technical-indicators/rsi/all-us-stocks?window=14&fallback=true&timeperiod=14&limit=${limit}`)
-      const result = await response.json()
+      const result = await queryData({ url: `/technical-indicators/rsi/all-us-stocks?window=14&fallback=true&timeperiod=14&limit=${limit}` })
 
       if (!result.is_error && result.data) {
         if (append) {

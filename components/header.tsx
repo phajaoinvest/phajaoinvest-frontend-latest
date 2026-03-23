@@ -150,7 +150,7 @@ export function Header() {
       </div>
 
       {isMenuOpen && (
-        <div className="h-[50vh] w-full md:hidden border rounded-md bg-background p-4">
+        <div className="absolute top-14 left-0 right-0 max-h-[calc(100vh-3.5rem)] w-full overflow-y-auto md:hidden border-b bg-background shadow-lg p-4">
           <nav className="flex flex-col space-y-3">
             {navLinks.map(({ href, label }) => {
               const isActive = pathname === href
@@ -160,7 +160,7 @@ export function Header() {
                   href={href}
                   className={`text-sm font-medium transition-colors ${isActive
                     ? "text-yellow-600 underline underline-offset-4"
-                    : "hover:text-yellow-600"
+                    : "hover:text-yellow-600 text-foreground"
                     }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -169,17 +169,18 @@ export function Header() {
               )
             })}
 
-            <div className="flex flex-col space-y-2 pt-2">
+            <div className="flex flex-col space-y-2 pt-2 border-t mt-2">
               {customer ? (
                 <>
-                  <Button variant="ghost" size="sm" asChild>
-                    <Link href="/dashboard">{t("header.dashboard")}</Link>
+                  <Button variant="ghost" size="sm" asChild className="justify-start">
+                    <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>{t("header.dashboard")}</Link>
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={() => setIsRedeemModalOpen(true)}>
+                  <Button variant="ghost" size="sm" onClick={() => { setIsRedeemModalOpen(true); setIsMenuOpen(false); }} className="justify-start">
                     <Ticket className="h-4 w-4 mr-2" />
                     {t("membership.coupon_title")}
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={logout}>
+                  <Button variant="ghost" size="sm" onClick={() => { logout(); setIsMenuOpen(false); }} className="text-red-500 justify-start hover:text-red-600 hover:bg-red-50">
+                    <LogOut className="h-4 w-4 mr-2" />
                     {t("header.sign_out")}
                   </Button>
                 </>
@@ -189,11 +190,17 @@ export function Header() {
                     variant="outline"
                     size="sm"
                     asChild
-                    className="border border-yellow-600 hover:bg-yellow-600 hover:text-white"
+                    className="border border-yellow-600 hover:bg-yellow-600 hover:text-white w-full justify-center"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     <Link href="/auth/login">{t("header.login")}</Link>
                   </Button>
-                  <Button size="sm" asChild className="bg-yellow-600 hover:bg-yellow-700 text-white">
+                  <Button 
+                    size="sm" 
+                    asChild 
+                    className="bg-yellow-600 hover:bg-yellow-700 text-white w-full justify-center"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     <Link href="/auth/register">{t("header.register")}</Link>
                   </Button>
                 </>
