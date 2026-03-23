@@ -38,7 +38,7 @@ export function Footer() {
             <h3 className="font-semibold mb-2 text-sm text-primary">{t("footer.service_title")}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/stock-analysis" className="text-muted-foreground hover:text-primary">
+                <Link href="/protected-routes/stock-analysis" className="text-muted-foreground hover:text-primary">
                   {t("footer.service_title1")}
                 </Link>
               </li>
