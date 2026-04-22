@@ -2,13 +2,24 @@
 
 import Link from "next/link"
 import type React from "react"
+import { useState } from "react"
 import { usePathname } from "next/navigation"
-import { User, Crown, TrendingUp, Settings, LogOut, Activity } from "lucide-react"
+import { User, Crown, TrendingUp, Settings, LogOut, Activity, Crosshair, Wallet } from "lucide-react"
 
 import { Header } from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 import { useTranslation } from "@/lib/i18n"
 import { useAuth } from "@/lib/auth-context"
@@ -25,6 +36,7 @@ export default function DashboardLayout({
   const pathname = usePathname()
   const customer = useCustomerStore((state) => state.customer);
   const clearCustomer = useCustomerStore((state) => state.clearCustomer);
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false)
 
   if (!customer) {
     return <div>Loading...</div>
@@ -34,7 +46,8 @@ export default function DashboardLayout({
     { icon: User, label: t("dashboard.sidebar.dashboard"), href: "/dashboard" },
     { icon: Crown, label: t("dashboard.sidebar.membership"), href: "/dashboard/membership" },
     { icon: TrendingUp, label: t("dashboard.sidebar.my_investment"), href: "/dashboard/guaranteed-returns" },
-    // { icon: DollarSign, label: t("dashboard.sidebar.my_stock"), href: "/dashboard/international-portfolio" },
+    { icon: Crosshair, label: t("guess.title"), href: "/dashboard/guess-buy" },
+    { icon: Wallet, label: t("paper.title"), href: "/dashboard/paper-portfolio" },
     { icon: Activity, label: t("dashboard.sidebar.stock_pick_history"), href: "/dashboard/stock-pick-history" },
   ]
 
@@ -42,7 +55,8 @@ export default function DashboardLayout({
     { icon: User, label: t("dashboard.sidebar.home"), href: "/dashboard" },
     { icon: Crown, label: t("dashboard.sidebar.member"), href: "/dashboard/membership" },
     { icon: TrendingUp, label: t("dashboard.sidebar.investment"), href: "/dashboard/guaranteed-returns" },
-    // { icon: ChartNoAxesColumn, label: t("dashboard.sidebar.stock_portfolio"), href: "/dashboard/international-portfolio" },
+    { icon: Crosshair, label: t("guess.title"), href: "/dashboard/guess-buy" },
+    { icon: Wallet, label: t("paper.title"), href: "/dashboard/paper-portfolio" },
     { icon: Activity, label: t("dashboard.sidebar.stock_picks"), href: "/dashboard/stock-pick-history" },
     { icon: Settings, label: t("dashboard.sidebar.account_settings"), href: "/dashboard/account-settings" },
   ]
@@ -107,7 +121,7 @@ export default function DashboardLayout({
                       )
                     })}
                     <button
-                      onClick={handleSignOut}
+                      onClick={() => setIsLogoutDialogOpen(true)}
                       className="flex items-center space-x-3 px-4 py-3 text-sm transition-all duration-200 border-l-4 border-transparent hover:bg-muted/50 hover:border-muted-foreground/20 w-full text-left"
                     >
                       <LogOut className="h-4 w-4" />
@@ -147,6 +161,23 @@ export default function DashboardLayout({
           )
         })}
       </nav>
+      
+      <AlertDialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("logout.confirm_title")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("logout.confirm_description")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("logout.cancel")}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleSignOut} className="bg-rose-600 hover:bg-rose-700">
+              {t("logout.confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

@@ -13,6 +13,16 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { LanguageSwitcher } from "@/components/language-switcher"
@@ -29,6 +39,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isRedeemModalOpen, setIsRedeemModalOpen] = useState(false)
   const customer = useCustomerStore((state) => state.customer);
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false)
 
   console.log("User:::", user)
 
@@ -113,7 +124,7 @@ export function Header() {
                     <Ticket className="h-4 w-4 mr-2" />
                     <span>{t("membership.coupon_title")}</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
+                  <DropdownMenuItem onClick={() => setIsLogoutDialogOpen(true)} className="text-red-500 cursor-pointer">
                     <LogOut className="h-4 w-4 mr-2" />
                     {t("header.sign_out")}
                   </DropdownMenuItem>
@@ -141,7 +152,7 @@ export function Header() {
               variant="outline"
               size="sm"
               className="md:hidden text-white border-white/30 hover:bg-yellow-600"
-              onClick={logout}
+              onClick={() => setIsLogoutDialogOpen(true)}
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -179,7 +190,7 @@ export function Header() {
                     <Ticket className="h-4 w-4 mr-2" />
                     {t("membership.coupon_title")}
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={() => { logout(); setIsMenuOpen(false); }} className="text-red-500 justify-start hover:text-red-600 hover:bg-red-50">
+                  <Button variant="ghost" size="sm" onClick={() => { setIsLogoutDialogOpen(true); setIsMenuOpen(false); }} className="text-red-500 justify-start hover:text-red-600 hover:bg-red-50">
                     <LogOut className="h-4 w-4 mr-2" />
                     {t("header.sign_out")}
                   </Button>
@@ -195,9 +206,9 @@ export function Header() {
                   >
                     <Link href="/auth/login">{t("header.login")}</Link>
                   </Button>
-                  <Button 
-                    size="sm" 
-                    asChild 
+                  <Button
+                    size="sm"
+                    asChild
                     className="bg-yellow-600 hover:bg-yellow-700 text-white w-full justify-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -214,6 +225,23 @@ export function Header() {
         isOpen={isRedeemModalOpen}
         onClose={() => setIsRedeemModalOpen(false)}
       />
+
+      <AlertDialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("logout.confirm_title")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("logout.confirm_description")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("logout.cancel")}</AlertDialogCancel>
+            <AlertDialogAction onClick={logout} className="bg-rose-600 hover:bg-rose-700">
+              {t("logout.confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </header>
   )
 }

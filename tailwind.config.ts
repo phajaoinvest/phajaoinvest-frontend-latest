@@ -18,6 +18,10 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        lao: ["var(--font-noto-sans-lao)"],
+        thai: ["var(--font-noto-sans-thai)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -79,10 +79,21 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-    /* font-family: "Playwrite RO" !important; */
   }
+}
+
+/* Bulletproof Font Overrides for Language Switching */
+html.font-lao body,
+html.font-lao :not(.font-mono):not(.lucide) {
+  font-family: var(--font-noto-sans-lao), "Noto Sans Lao", sans-serif !important;
+}
+
+html.font-thai body,
+html.font-thai :not(.font-mono):not(.lucide) {
+  font-family: var(--font-noto-sans-thai), "Noto Sans Thai", sans-serif !important;
 }
 
 .text-xs {
@@ -145,6 +156,7 @@
 }
 
 @media (max-width: 768px) {
+
   .services-swiper .swiper-button-next,
   .services-swiper .swiper-button-prev,
   .news-swiper .swiper-button-next,

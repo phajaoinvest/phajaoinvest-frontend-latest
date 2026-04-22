@@ -2,7 +2,7 @@ import Link from "next/link"
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Headset } from "lucide-react"
-import { Inter } from "next/font/google"
+import { Inter, Noto_Sans_Lao, Noto_Sans_Thai } from "next/font/google"
 import { TranslationProvider } from "@/lib/i18n"
 
 import "./globals.css"
@@ -11,7 +11,20 @@ import ToastProvider from "@/components/toastProvider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const notoSansLao = Noto_Sans_Lao({
+  subsets: ["lao"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-noto-sans-lao",
+})
+
+const notoSansThai = Noto_Sans_Thai({
+  subsets: ["thai"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-noto-sans-thai",
+})
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -59,7 +72,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Phajaoinvest" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${notoSansLao.variable} ${notoSansThai.variable} antialiased`}>
         <ServiceWorkerRegistration />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>

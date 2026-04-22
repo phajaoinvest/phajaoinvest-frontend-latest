@@ -17,19 +17,33 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 export function TranslationProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language | null>(null)
 
+  const changeLanguage = (lang: Language) => {
+    setLanguage(lang)
+    localStorage.setItem("language", lang)
+    document.documentElement.classList.remove("font-lao", "font-thai")
+    if (lang === "lo") {
+      document.documentElement.classList.add("font-lao")
+    } else if (lang === "th") {
+      document.documentElement.classList.add("font-thai")
+    }
+  }
+
   useEffect(() => {
     const savedLanguage = localStorage.getItem("language") as Language
     if (savedLanguage && ["en", "lo", "th"].includes(savedLanguage)) {
       setLanguage(savedLanguage)
+      document.documentElement.classList.remove("font-lao", "font-thai")
+      if (savedLanguage === "lo") {
+        document.documentElement.classList.add("font-lao")
+      } else if (savedLanguage === "th") {
+        document.documentElement.classList.add("font-thai")
+      }
     } else {
       setLanguage("lo")
+      document.documentElement.classList.remove("font-lao", "font-thai")
+      document.documentElement.classList.add("font-lao")
     }
   }, [])
-
-  const changeLanguage = (lang: Language) => {
-    setLanguage(lang)
-    localStorage.setItem("language", lang)
-  }
 
   const t = (key: string): string => {
     if (!language) return key // prevent mismatch
