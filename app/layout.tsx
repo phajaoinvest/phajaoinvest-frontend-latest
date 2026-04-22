@@ -10,6 +10,8 @@ import { AuthProvider } from "@/lib/auth-context"
 import ToastProvider from "@/components/toastProvider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration"
+import GoogleAnalytics from "@/components/google-analytics"
+import { Suspense } from "react"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const notoSansLao = Noto_Sans_Lao({
@@ -73,6 +75,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Phajaoinvest" />
       </head>
       <body className={`${inter.variable} ${notoSansLao.variable} ${notoSansThai.variable} antialiased`}>
+        <Suspense>
+          <GoogleAnalytics />
+        </Suspense>
         <ServiceWorkerRegistration />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <AuthProvider>

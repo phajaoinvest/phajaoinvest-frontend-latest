@@ -4,6 +4,7 @@ import React from "react"
 import { useRouter } from "next/navigation"
 import { useTranslation } from "@/lib/i18n"
 import { Star, Globe, TrendingUp } from "lucide-react"
+import * as ga from "@/lib/ga"
 
 // components:
 import { Header } from "@/components/header"
@@ -42,6 +43,12 @@ export default function PricingPage() {
 
   const handleSelectPlan = (plan: IPackagesResponse) => {
     if (!plan.is_current) {
+      ga.event({
+        action: "select_pricing_plan",
+        category: "conversion",
+        label: plan.description || plan.service_type,
+        value: Number(plan.price),
+      });
       const paymentUrl = `/payment?plan=${encodeURIComponent(plan.service_type)}&price=${encodeURIComponent(plan.price)}&id=${encodeURIComponent(plan.id)}`
       router.push(paymentUrl)
     }
@@ -49,6 +56,12 @@ export default function PricingPage() {
 
   const handleRenewPlan = (plan: IPackagesResponse) => {
     if (plan.is_current) {
+      ga.event({
+        action: "renew_pricing_plan",
+        category: "conversion",
+        label: plan.description || plan.service_type,
+        value: Number(plan.price),
+      });
       const paymentUrl = `/payment?plan=${encodeURIComponent(plan.service_type)}&price=${encodeURIComponent(plan.price)}&id=${encodeURIComponent(plan.id)}&renew=true&duration=${encodeURIComponent(plan.duration_months)}`
       router.push(paymentUrl)
     }

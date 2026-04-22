@@ -29,6 +29,7 @@ import {
   Lock,
 } from "lucide-react"
 import { queryData, postAPI } from "@/app/api/api"
+import * as ga from "@/lib/ga"
 
 // ============================================================================
 // Types
@@ -109,6 +110,12 @@ export default function GuessBuyPage() {
         body: { stock_id: selectedStockId, investment_amount: amount },
       })
       if (res?.data) {
+        ga.event({
+          action: "place_paper_trade",
+          category: "trading",
+          label: selectedStock?.symbol || "hidden_stock",
+          value: amount,
+        });
         setShowSuccess(true)
         setInvestmentAmount("")
         setSelectedStockId("")

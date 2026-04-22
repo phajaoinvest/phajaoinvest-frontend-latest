@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Crown, Loader, Ticket, Gift, Sparkles } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 import { postAPI } from "@/app/api/api"
+import * as ga from "@/lib/ga"
 import { useToast } from "@/app/utils/toast"
 import {
   Dialog,
@@ -37,6 +38,11 @@ export function RedeemCouponModal({ isOpen, onClose }: RedeemCouponModalProps) {
       })
 
       if (!res.is_error) {
+        ga.event({
+          action: "redeem_coupon",
+          category: "engagement",
+          label: couponCode.trim(),
+        });
         successMessage(t("membership.coupon_success"), 5000)
         setCouponCode("")
         onClose()

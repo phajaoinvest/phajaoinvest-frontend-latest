@@ -38,6 +38,7 @@ import {
   EyeOff,
 } from "lucide-react"
 import { queryData, postAPI } from "@/app/api/api"
+import * as ga from "@/lib/ga"
 
 // ============================================================================
 // Types
@@ -161,6 +162,12 @@ export default function PaperPortfolioPage() {
         url: `/paper-trades/${selectedTrade.id}/close`,
         body: {},
       })
+      ga.event({
+        action: "close_paper_trade",
+        category: "trading",
+        label: selectedTrade.symbol || "hidden_stock",
+        value: selectedTrade.unrealized_pnl,
+      });
       setShowCloseConfirm(false)
       setSelectedTrade(null)
       fetchData()

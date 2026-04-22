@@ -27,6 +27,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import * as ga from "@/lib/ga"
 
 import { useCustomerStore } from "../../store/useCustomerStore"
 import { useTranslation } from "@/lib/i18n"
@@ -55,6 +56,11 @@ export default function StockAnalysisPage() {
 
   const handleSearch = () => {
     if (stockSymbol.trim()) {
+      ga.event({
+        action: "stock_search",
+        category: "engagement",
+        label: stockSymbol.trim().toUpperCase(),
+      });
       router.push(`/protected-routes/stock-result/${stockSymbol.toUpperCase()}`)
     }
   }
