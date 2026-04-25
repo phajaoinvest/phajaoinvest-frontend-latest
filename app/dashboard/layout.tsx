@@ -46,8 +46,6 @@ export default function DashboardLayout({
     { icon: User, label: t("dashboard.sidebar.dashboard"), href: "/dashboard" },
     { icon: Crown, label: t("dashboard.sidebar.membership"), href: "/dashboard/membership" },
     { icon: TrendingUp, label: t("dashboard.sidebar.my_investment"), href: "/dashboard/guaranteed-returns" },
-    { icon: Crosshair, label: t("guess.title"), href: "/dashboard/guess-buy" },
-    { icon: Wallet, label: t("paper.title"), href: "/dashboard/paper-portfolio" },
     { icon: Activity, label: t("dashboard.sidebar.stock_pick_history"), href: "/dashboard/stock-pick-history" },
   ]
 
@@ -55,8 +53,6 @@ export default function DashboardLayout({
     { icon: User, label: t("dashboard.sidebar.home"), href: "/dashboard" },
     { icon: Crown, label: t("dashboard.sidebar.member"), href: "/dashboard/membership" },
     { icon: TrendingUp, label: t("dashboard.sidebar.investment"), href: "/dashboard/guaranteed-returns" },
-    { icon: Crosshair, label: t("guess.title"), href: "/dashboard/guess-buy" },
-    { icon: Wallet, label: t("paper.title"), href: "/dashboard/paper-portfolio" },
     { icon: Activity, label: t("dashboard.sidebar.stock_picks"), href: "/dashboard/stock-pick-history" },
     { icon: Settings, label: t("dashboard.sidebar.account_settings"), href: "/dashboard/account-settings" },
   ]
