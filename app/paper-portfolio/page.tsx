@@ -251,10 +251,10 @@ export default function PaperPortfolioPage() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 text-primary border border-primary/30 shadow-[0_0_15px_rgba(var(--primary),0.2)]">
-                <Briefcase className="h-5 w-5" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary/20 text-primary border border-primary/30 shadow-[0_0_15px_rgba(var(--primary),0.2)]">
+                <Briefcase className="w-4 h-4" />
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+              <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
                 {t("paper.title")}
               </h1>
             </div>
@@ -264,12 +264,12 @@ export default function PaperPortfolioPage() {
           </div>
           <div className="flex items-center gap-3">
             <Button variant="outline" size="sm" onClick={fetchData} className="h-10 rounded-xl border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-md">
-              <RefreshCw className={`mr-2 h-4 w-4 ${loading ? "animate-spin text-primary" : ""}`} />
+              <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin text-primary" : ""}`} />
               {t("paper.refresh")}
             </Button>
             <Button size="sm" className="h-10 px-5 rounded-xl bg-primary text-white font-black uppercase tracking-widest shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all" asChild>
               <a href="/guess-buy">
-                <Plus className="mr-2 h-4 w-4" />
+                <Plus className="h-4 w-4" />
                 {t("paper.new_trade")}
               </a>
             </Button>
@@ -279,18 +279,18 @@ export default function PaperPortfolioPage() {
         {/* Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Demo Balance Card */}
-          <div className="group relative rounded-2xl sm:rounded-3xl border border-white/5 bg-white/[0.03] p-3.5 sm:p-6 backdrop-blur-2xl transition-all duration-300 hover:border-primary/50 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(var(--primary),0.1)]">
+          <div className="group relative rounded-lg border border-white/5 bg-white/[0.03] p-4 backdrop-blur-2xl transition-all duration-300 hover:border-primary/50 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(var(--primary),0.1)]">
             <div className="flex items-start justify-between">
               <div className="space-y-1 sm:space-y-2">
-                <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-500">{t("paper.demo_balance")}</p>
+                <p className="text-sm font-black uppercase text-slate-500">{t("paper.demo_balance")}</p>
                 <p className="text-base sm:text-2xl font-mono font-black text-primary drop-shadow-[0_0_10px_rgba(var(--primary),0.3)] leading-none">
                   {formatCurrency(balance?.demo_balance ?? 0)}
                 </p>
               </div>
               <div className="relative shrink-0">
                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-                <div className="relative p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-primary/10 text-primary border border-primary/20">
-                  <Wallet className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+                <div className="relative p-2 rounded-lg bg-primary/10 text-primary border border-primary/20">
+                  <Wallet className="w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -301,18 +301,18 @@ export default function PaperPortfolioPage() {
           </div>
 
           {/* Active Positions Card */}
-          <div className="group relative rounded-2xl sm:rounded-3xl border border-white/5 bg-white/[0.03] p-3.5 sm:p-6 backdrop-blur-2xl transition-all duration-300 hover:border-blue-500/50 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]">
+          <div className="group relative rounded-lg border border-white/5 bg-white/[0.03] p-4 backdrop-blur-2xl transition-all duration-300 hover:border-blue-500/50 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]">
             <div className="flex items-start justify-between">
               <div className="space-y-1 sm:space-y-2">
-                <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-500">{t("paper.active_positions")}</p>
+                <p className="text-sm font-black uppercase text-slate-500">{t("paper.active_positions")}</p>
                 <p className="text-base sm:text-2xl font-mono font-black text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.3)] leading-none">
                   {formatCurrency(summary?.total_invested ?? 0)}
                 </p>
               </div>
               <div className="relative shrink-0">
                 <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full" />
-                <div className="relative p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                  <DollarSign className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+                <div className="relative p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  <DollarSign className="w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -324,18 +324,18 @@ export default function PaperPortfolioPage() {
           </div>
 
           {/* Current Value Card */}
-          <div className="group relative rounded-2xl sm:rounded-3xl border border-white/5 bg-white/[0.03] p-3.5 sm:p-6 backdrop-blur-2xl transition-all duration-300 hover:border-purple-500/50 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]">
+          <div className="group relative rounded-lg border border-white/5 bg-white/[0.03] p-4 backdrop-blur-2xl transition-all duration-300 hover:border-purple-500/50 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(168,85,247,0.1)]">
             <div className="flex items-start justify-between">
               <div className="space-y-1 sm:space-y-2">
-                <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-500">{t("paper.current_value")}</p>
+                <p className="text-sm font-black uppercase text-slate-500">{t("paper.current_value")}</p>
                 <p className="text-base sm:text-2xl font-mono font-black text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.3)] leading-none">
                   {formatCurrency(summary?.total_current_value ?? 0)}
                 </p>
               </div>
               <div className="relative shrink-0">
                 <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full" />
-                <div className="relative p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                  <BarChart3 className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+                <div className="relative p-2 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                  <BarChart3 className="w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -345,13 +345,13 @@ export default function PaperPortfolioPage() {
           </div>
 
           {/* Total PnL Card */}
-          <div className={`group relative rounded-2xl sm:rounded-3xl border border-white/5 p-3.5 sm:p-6 backdrop-blur-2xl transition-all duration-300
-            ${(summary?.total_pnl ?? 0) >= 0 
-              ? "bg-emerald-500/[0.02] hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]" 
+          <div className={`group relative rounded-lg border border-white/5 p-4 backdrop-blur-2xl transition-all duration-300
+            ${(summary?.total_pnl ?? 0) >= 0
+              ? "bg-emerald-500/[0.02] hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]"
               : "bg-red-500/[0.02] hover:border-red-500/50 hover:shadow-[0_0_30px_rgba(244,63,94,0.1)]"}`}>
             <div className="flex items-start justify-between">
               <div className="space-y-1 sm:space-y-2">
-                <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.2em] text-slate-500">{t("paper.total_pnl")}</p>
+                <p className="text-sm font-black uppercase text-slate-500">{t("paper.total_pnl")}</p>
                 <p className={`text-base sm:text-2xl font-mono font-black leading-none drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]
                   ${(summary?.total_pnl ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                   {formatPnl(summary?.total_pnl ?? 0)}
@@ -359,10 +359,10 @@ export default function PaperPortfolioPage() {
               </div>
               <div className="relative shrink-0">
                 <div className={`absolute inset-0 blur-xl rounded-full ${(summary?.total_pnl ?? 0) >= 0 ? "bg-emerald-500/20" : "bg-red-500/20"}`} />
-                <div className={`relative p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl border ${(summary?.total_pnl ?? 0) >= 0 
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
+                <div className={`relative p-2 rounded-lg border ${(summary?.total_pnl ?? 0) >= 0
+                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
                   : "bg-red-500/10 text-red-400 border-red-500/20"}`}>
-                  {(summary?.total_pnl ?? 0) >= 0 ? <TrendingUp className="h-3.5 w-3.5 sm:h-5 sm:w-5" /> : <TrendingDown className="h-3.5 w-3.5 sm:h-5 sm:w-5" />}
+                  {(summary?.total_pnl ?? 0) >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                 </div>
               </div>
             </div>
@@ -398,7 +398,7 @@ export default function PaperPortfolioPage() {
 
           {/* Open Trades */}
           <TabsContent value="open" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <Card className="border-white/5 bg-white/[0.02] rounded-3xl overflow-hidden shadow-2xl">
+            <Card className="border-white/5 bg-white/[0.02] rounded-lg overflow-hidden shadow-2xl">
               <CardContent className="p-0">
                 {openPositions.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-24 text-center space-y-4">

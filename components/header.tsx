@@ -56,7 +56,7 @@ export function Header() {
     { href: "/protected-routes/stock-analysis", label: t("header.tool") },
     { href: "/pricing", label: t("header.pricing") },
     { href: "/stock-picks", label: t("services.stock_pick") },
-    { href: "/guess-buy", label: t("guess.title") },
+    // { href: "/guess-buy", label: t("guess.title") },
     { href: "/paper-portfolio", label: t("paper.title") },
     // { href: "/protected-routes/news", label: t("header.news") },
   ]
