@@ -86,13 +86,13 @@ export default function StocksListPage() {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
                   <Zap className="h-3 w-3" />
-                  Market Intelligence
+                  {t("stocks_list.market_intelligence")}
                 </div>
                 <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
                   {t("header.stocks")}
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                  Deep dive into global markets with our advanced technical indicators and real-time support/resistance analysis.
+                  {t("stocks_list.hero_description")}
                 </p>
               </div>
 
@@ -100,7 +100,7 @@ export default function StocksListPage() {
                 <div className="relative group">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                   <Input
-                    placeholder="Search symbol or name..."
+                    placeholder={t("stocks_list.search_placeholder")}
                     value={search}
                     onChange={handleSearch}
                     className="pl-10 h-12 w-full sm:w-72 bg-background/50 backdrop-blur-md border-primary/20 focus:border-primary transition-all rounded-xl shadow-inner"
@@ -124,7 +124,7 @@ export default function StocksListPage() {
             <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-sm hover:shadow-md transition-all group">
               <CardHeader className="p-5 pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Total Assets</CardTitle>
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{t("stocks_list.total_assets")}</CardTitle>
                   <Building2 className="h-4 w-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
                 </div>
               </CardHeader>
@@ -132,7 +132,7 @@ export default function StocksListPage() {
                 <div className="text-3xl font-black text-foreground">{total}</div>
                 <div className="text-[10px] text-green-500 font-bold mt-1 flex items-center gap-1">
                   <TrendingUp className="h-3 w-3" />
-                  LIVE DATABASE
+                  {t("stocks_list.live_database")}
                 </div>
               </CardContent>
             </Card>
@@ -140,39 +140,39 @@ export default function StocksListPage() {
             <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-sm hover:shadow-md transition-all group">
               <CardHeader className="p-5 pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Exchanges</CardTitle>
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{t("stocks_list.exchanges")}</CardTitle>
                   <Globe className="h-4 w-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
                 </div>
               </CardHeader>
               <CardContent className="p-5 pt-0">
-                <div className="text-3xl font-black text-foreground">Global</div>
-                <div className="text-[10px] text-muted-foreground font-bold mt-1 uppercase">US, EU & Asia Markets</div>
+                <div className="text-3xl font-black text-foreground">{t("stocks_list.global")}</div>
+                <div className="text-[10px] text-muted-foreground font-bold mt-1 uppercase">{t("stocks_list.markets_desc")}</div>
               </CardContent>
             </Card>
 
             <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-sm hover:shadow-md transition-all group">
               <CardHeader className="p-5 pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Analysis Mode</CardTitle>
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{t("stocks_list.analysis_mode")}</CardTitle>
                   <TrendingUp className="h-4 w-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
                 </div>
               </CardHeader>
               <CardContent className="p-5 pt-0">
-                <div className="text-3xl font-black text-foreground">Active</div>
-                <div className="text-[10px] text-primary font-bold mt-1 uppercase tracking-tighter">Support & Resistance Live</div>
+                <div className="text-3xl font-black text-foreground">{t("stocks_list.active")}</div>
+                <div className="text-[10px] text-primary font-bold mt-1 uppercase tracking-tighter">{t("stocks_list.support_resistance_live")}</div>
               </CardContent>
             </Card>
 
             <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-sm hover:shadow-md transition-all group">
               <CardHeader className="p-5 pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Update Freq</CardTitle>
+                  <CardTitle className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{t("stocks_list.update_freq")}</CardTitle>
                   <RefreshCw className="h-4 w-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
                 </div>
               </CardHeader>
               <CardContent className="p-5 pt-0">
-                <div className="text-3xl font-black text-foreground">Real-time</div>
-                <div className="text-[10px] text-muted-foreground font-bold mt-1 uppercase">Instant price updates</div>
+                <div className="text-3xl font-black text-foreground">{t("stocks_list.real_time")}</div>
+                <div className="text-[10px] text-muted-foreground font-bold mt-1 uppercase">{t("stocks_list.instant_price")}</div>
               </CardContent>
             </Card>
           </div>
@@ -188,7 +188,7 @@ export default function StocksListPage() {
                       <BarChart3 className="h-5 w-5 text-primary/50" />
                     </div>
                   </div>
-                  <p className="text-muted-foreground font-medium animate-pulse uppercase tracking-widest text-xs">Synchronizing market data...</p>
+                  <p className="text-muted-foreground font-medium animate-pulse uppercase tracking-widest text-xs">{t("stocks_list.syncing")}</p>
                 </div>
               ) : stocks.length === 0 ? (
                 <div className="flex h-96 flex-col items-center justify-center text-muted-foreground text-center p-12 space-y-6">
@@ -196,25 +196,25 @@ export default function StocksListPage() {
                     <Search className="h-16 w-16 opacity-10" />
                   </div>
                   <div className="space-y-2">
-                    <p className="text-2xl font-bold text-foreground">No Assets Found</p>
+                    <p className="text-2xl font-bold text-foreground">{t("stocks_list.no_assets")}</p>
                     <p className="text-sm max-w-xs mx-auto text-muted-foreground leading-relaxed">
-                      We couldn't find any stocks matching your current search criteria. Please try a different symbol or name.
+                      {t("stocks_list.no_assets_desc")}
                     </p>
                   </div>
-                  <Button variant="outline" onClick={() => setSearch('')} className="rounded-xl">Clear All Filters</Button>
+                  <Button variant="outline" onClick={() => setSearch('')} className="rounded-xl">{t("stocks_list.clear_filters")}</Button>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader className="bg-muted/30 backdrop-blur-md">
                       <TableRow className="border-primary/5 hover:bg-transparent">
-                        <TableHead className="w-[140px] font-bold text-foreground h-14 pl-8 uppercase tracking-wider text-[10px]">Symbol</TableHead>
-                        <TableHead className="font-bold text-foreground uppercase tracking-wider text-[10px]">Company Name</TableHead>
-                        <TableHead className="font-bold text-foreground uppercase tracking-wider text-[10px]">Sector</TableHead>
-                        <TableHead className="text-right font-bold text-foreground uppercase tracking-wider text-[10px]">Price (USD)</TableHead>
-                        <TableHead className="text-center font-bold text-foreground uppercase tracking-wider text-[10px]">Technical Support</TableHead>
-                        <TableHead className="text-center font-bold text-foreground uppercase tracking-wider text-[10px]">Price Resistance</TableHead>
-                        <TableHead className="text-right pr-8 font-bold text-foreground uppercase tracking-wider text-[10px]">Actions</TableHead>
+                        <TableHead className="w-[140px] font-bold text-foreground h-14 pl-8 uppercase tracking-wider text-[10px]">{t("stocks_list.symbol")}</TableHead>
+                        <TableHead className="font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.company_name")}</TableHead>
+                        <TableHead className="font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.sector")}</TableHead>
+                        <TableHead className="text-right font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.price_usd")}</TableHead>
+                        <TableHead className="text-center font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.technical_support")}</TableHead>
+                        <TableHead className="text-center font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.price_resistance")}</TableHead>
+                        <TableHead className="text-right pr-8 font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.actions")}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -226,7 +226,7 @@ export default function StocksListPage() {
                                 {stock.show_symbol ? stock.symbol : '*****'}
                               </span>
                               <Badge variant="outline" className="w-fit text-[9px] h-4 py-0 px-1 border-primary/20 text-primary uppercase font-black bg-primary/5">
-                                {stock.exchange || 'LIVE'}
+                                {stock.exchange || t("stocks_list.live")}
                               </Badge>
                             </div>
                           </TableCell>
@@ -235,12 +235,12 @@ export default function StocksListPage() {
                               <span className="font-bold text-foreground line-clamp-1 group-hover:underline underline-offset-4 decoration-primary/30">
                                 {stock.name}
                               </span>
-                              <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">{stock.country || 'Global Market'}</span>
+                              <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">{stock.country || t("stocks_list.global_market")}</span>
                             </div>
                           </TableCell>
                           <TableCell>
-                            <Badge className="font-bold text-[10px] bg-muted/50 border border-border/20 uppercase">
-                              {stock.sector || 'N/A'}
+                            <Badge className="text-white font-bold text-[10px] bg-muted/50 border border-border/20 uppercase">
+                              {stock.sector || t("stocks_list.na")}
                             </Badge>
                           </TableCell>
                           <TableCell className="text-right">
@@ -256,24 +256,24 @@ export default function StocksListPage() {
                           <TableCell className="text-center">
                             <div className="flex flex-col items-center justify-center space-y-1">
                               <div className="px-3 py-1 bg-green-500/10 rounded-lg border border-green-500/20 w-32">
-                                <span className="text-[10px] text-green-600/70 font-bold block leading-none">PRIMARY SUPPORT</span>
-                                <span className="text-sm text-green-600 font-black font-mono tracking-tight">{stock.support1 ? formatUSD(stock.support1) : '-'}</span>
+                                <span className="text-[10px] text-green-600/70 font-bold block leading-none">{t("stocks_list.primary_support")}</span>
+                                <span className="text-[11px] text-green-600 font-black font-mono tracking-tight">{stock.support1 ? formatUSD(stock.support1) : '-'}</span>
                               </div>
                               <div className="px-3 py-1 bg-green-500/5 rounded-lg border border-green-500/10 w-32">
-                                <span className="text-[10px] text-green-600/50 font-bold block leading-none text-[8px]">SECONDARY</span>
-                                <span className="text-xs text-green-600/70 font-bold font-mono tracking-tight">{stock.support2 ? formatUSD(stock.support2) : '-'}</span>
+                                <span className="text-[11px] text-green-600/50 font-bold block leading-none text-[8px]">{t("stocks_list.secondary")}</span>
+                                <span className="text-[11px] text-green-600/70 font-bold font-mono tracking-tight">{stock.support2 ? formatUSD(stock.support2) : '-'}</span>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell className="text-center">
                             <div className="flex flex-col items-center justify-center space-y-1">
                               <div className="px-3 py-1 bg-red-500/10 rounded-lg border border-red-500/20 w-32">
-                                <span className="text-[10px] text-red-600/70 font-bold block leading-none">PRIMARY TARGET</span>
-                                <span className="text-sm text-red-600 font-black font-mono tracking-tight">{stock.resistance1 ? formatUSD(stock.resistance1) : '-'}</span>
+                                <span className="text-[11px] text-red-600/70 font-bold block leading-none">{t("stocks_list.primary_target")}</span>
+                                <span className="text-[11px] text-red-600 font-black font-mono tracking-tight">{stock.resistance1 ? formatUSD(stock.resistance1) : '-'}</span>
                               </div>
                               <div className="px-3 py-1 bg-red-500/5 rounded-lg border border-red-500/10 w-32">
-                                <span className="text-[10px] text-red-600/50 font-bold block leading-none text-[8px]">SECONDARY</span>
-                                <span className="text-xs text-red-600/70 font-bold font-mono tracking-tight">{stock.resistance2 ? formatUSD(stock.resistance2) : '-'}</span>
+                                <span className="text-[11px] text-red-600/50 font-bold block leading-none text-[8px]">{t("stocks_list.secondary")}</span>
+                                <span className="text-[11px] text-red-600/70 font-bold font-mono tracking-tight">{stock.resistance2 ? formatUSD(stock.resistance2) : '-'}</span>
                               </div>
                             </div>
                           </TableCell>
@@ -284,7 +284,7 @@ export default function StocksListPage() {
                               className="rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95 px-4"
                               onClick={() => router.push(`/protected-routes/stock-result/${stock.symbol}`)}
                             >
-                              ANALYSIS
+                              {t("stocks_list.analysis_btn")}
                               <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
                           </TableCell>
