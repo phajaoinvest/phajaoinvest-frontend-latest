@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useTranslation } from "@/lib/i18n"
 import { usePathname } from "next/navigation"
-import { TrendingUp, Menu, X, User, LogOut } from "lucide-react"
+import { TrendingUp, Menu, X, User, LogOut, List } from "lucide-react"
 
 // components
 import {
@@ -54,6 +54,7 @@ export function Header() {
 
   const navLinks = [
     { href: "/protected-routes/stock-analysis", label: t("header.tool") },
+    { href: "/protected-routes/stocks", label: t("header.stocks") },
     { href: "/pricing", label: t("header.pricing") },
     { href: "/stock-picks", label: t("services.stock_pick") },
     // { href: "/guess-buy", label: t("guess.title") },

@@ -1,6 +1,7 @@
 export const english = {
   // header
-  "header.tool": "Stock analysis tools",
+  "header.tool": "Stock Analysis Tool",
+  "header.stocks": "Stocks",
   "header.pricing": "Pricing",
   "header.news": "News",
   "header.my_account": "My account",

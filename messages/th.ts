@@ -1,6 +1,7 @@
 export const thai = {
   // header
   "header.tool": "เครื่องมือวิเคราะห์หุ้น",
+  "header.stocks": "หุ้น",
   "header.pricing": "ราคาแพ็กเกจ",
   "header.news": "ข่าวสาร",
   "header.my_account": "บัญชีของฉัน",

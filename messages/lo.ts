@@ -1,7 +1,8 @@
 export const laos = {
   // header
-  "header.tool": "ເຄື່ອງມືວິເຄາະຫຸ້ນ",
-  "header.pricing": "ແພັກແກັດ",
+  "header.tool": "ເຄື່ອງມືວິເຄາະຮຸ້ນ",
+  "header.stocks": "ຮຸ້ນ",
+  "header.pricing": "ລາຄາແພັກເກດ",
   "header.news": "ຂ່າວສານ",
   "header.my_account": "ບັນຊີຂອງຂ້ອຍ",
   "header.dashboard": "ຫນ້າຫຼັກ",

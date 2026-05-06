@@ -280,10 +280,11 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
     const chartWidth = rect.width - padding.left - padding.right
     const chartHeight = rect.height - padding.top - padding.bottom
 
-    // Find min and max prices
-    const prices = data.map((d) => d.c)
-    const minPrice = Math.min(...prices)
-    const maxPrice = Math.max(...prices)
+    // Find min and max prices using High and Low for candlesticks
+    const allHighs = data.map((d) => d.h)
+    const allLows = data.map((d) => d.l)
+    const minPrice = Math.min(...allLows)
+    const maxPrice = Math.max(...allHighs)
     const priceRange = maxPrice - minPrice
     const priceBuffer = priceRange * 0.1
 
@@ -292,41 +293,48 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
     const yScale = (price: number) =>
       padding.top + chartHeight - ((price - (minPrice - priceBuffer)) / (priceRange + priceBuffer * 2)) * chartHeight
 
-    // Draw gradient fill
-    const gradient = ctx.createLinearGradient(0, padding.top, 0, rect.height - padding.bottom)
-    if (stats?.isPositive) {
-      gradient.addColorStop(0, "rgba(34, 197, 94, 0.3)")
-      gradient.addColorStop(1, "rgba(34, 197, 94, 0.01)")
-    } else {
-      gradient.addColorStop(0, "rgba(239, 68, 68, 0.3)")
-      gradient.addColorStop(1, "rgba(239, 68, 68, 0.01)")
+    // Draw grid lines
+    ctx.strokeStyle = "rgba(55, 65, 81, 0.3)"
+    ctx.lineWidth = 1
+    const numYLabels = 5
+    for (let i = 0; i < numYLabels; i++) {
+      const price = minPrice - priceBuffer + ((priceRange + priceBuffer * 2) / (numYLabels - 1)) * i
+      const y = yScale(price)
+      ctx.beginPath()
+      ctx.moveTo(padding.left, y)
+      ctx.lineTo(rect.width - padding.right, y)
+      ctx.stroke()
     }
 
-    // Draw filled area
-    ctx.beginPath()
-    ctx.moveTo(xScale(0), yScale(data[0].c))
+    // Draw candlesticks
+    const candleWidth = Math.max(1, (chartWidth / data.length) * 0.8)
+    
     data.forEach((point, index) => {
-      ctx.lineTo(xScale(index), yScale(point.c))
-    })
-    ctx.lineTo(xScale(data.length - 1), rect.height - padding.bottom)
-    ctx.lineTo(xScale(0), rect.height - padding.bottom)
-    ctx.closePath()
-    ctx.fillStyle = gradient
-    ctx.fill()
+      const x = xScale(index)
+      const isPositive = point.c >= point.o
+      const color = isPositive ? "rgb(34, 197, 94)" : "rgb(239, 68, 68)"
+      
+      ctx.strokeStyle = color
+      ctx.fillStyle = color
+      ctx.lineWidth = 1
 
-    // Draw line
-    ctx.beginPath()
-    ctx.moveTo(xScale(0), yScale(data[0].c))
-    data.forEach((point, index) => {
-      ctx.lineTo(xScale(index), yScale(point.c))
+      // 1. Draw wick (high to low)
+      ctx.beginPath()
+      ctx.moveTo(x, yScale(point.h))
+      ctx.lineTo(x, yScale(point.l))
+      ctx.stroke()
+
+      // 2. Draw body (open to close)
+      const bodyTop = yScale(Math.max(point.o, point.c))
+      const bodyBottom = yScale(Math.min(point.o, point.c))
+      const bodyHeight = Math.max(1, bodyBottom - bodyTop)
+      
+      ctx.fillRect(x - candleWidth / 2, bodyTop, candleWidth, bodyHeight)
     })
-    ctx.strokeStyle = stats?.isPositive ? "rgb(34, 197, 94)" : "rgb(239, 68, 68)"
-    ctx.lineWidth = 2
-    ctx.stroke()
 
     // Draw previous close line (dotted)
     if (data.length > 0) {
-      const prevClose = data[0].c
+      const prevClose = data[0].o // Use first open as baseline if prevClose not available
       const y = yScale(prevClose)
 
       ctx.beginPath()
@@ -344,7 +352,7 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
       ctx.fillStyle = "white"
       ctx.font = "11px sans-serif"
       ctx.textAlign = "left"
-      ctx.fillText("Prev close", rect.width - padding.right + 8, y + 3)
+      ctx.fillText("Baseline", rect.width - padding.right + 8, y + 3)
     }
 
     // Draw Y-axis labels (prices)
@@ -352,7 +360,6 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
     ctx.font = "12px sans-serif"
     ctx.textAlign = "left"
 
-    const numYLabels = 5
     for (let i = 0; i < numYLabels; i++) {
       const price = minPrice - priceBuffer + ((priceRange + priceBuffer * 2) / (numYLabels - 1)) * i
       const y = yScale(price)
@@ -372,7 +379,6 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
       let label2 = ""
 
       if (selectedPeriod === "1D" || selectedPeriod === "5D") {
-        // Show time for short periods
         const hours = date.getHours().toString().padStart(2, "0")
         const minutes = date.getMinutes().toString().padStart(2, "0")
         label1 = `${hours}:${minutes}`
@@ -380,7 +386,6 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
           label2 = date.toLocaleDateString("en-GB", { day: "2-digit", month: "short" })
         }
       } else {
-        // Show date for longer periods
         label1 = date.toLocaleDateString("en-GB", { day: "2-digit", month: "short" })
         if (selectedPeriod === "1Y" || selectedPeriod === "5Y" || selectedPeriod === "ALL") {
           label2 = date.getFullYear().toString()
@@ -395,6 +400,10 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
 
     // Draw hover point indicator
     if (hoverPoint && hoverPoint.dataIndex >= 0 && hoverPoint.dataIndex < data.length) {
+      const point = data[hoverPoint.dataIndex]
+      const isPositive = point.c >= point.o
+      const color = isPositive ? "rgb(34, 197, 94)" : "rgb(239, 68, 68)"
+
       // Draw vertical line
       ctx.beginPath()
       ctx.setLineDash([3, 3])
@@ -421,13 +430,13 @@ export default function StockChart({ data: initialData = [], symbol }: StockChar
       ctx.fillStyle = "white"
       ctx.fill()
 
-      // Draw inner circle (colored based on trend)
+      // Draw inner circle
       ctx.beginPath()
       ctx.arc(hoverPoint.x, hoverPoint.y, 4, 0, 2 * Math.PI)
-      ctx.fillStyle = stats?.isPositive ? "rgb(34, 197, 94)" : "rgb(239, 68, 68)"
+      ctx.fillStyle = color
       ctx.fill()
     }
-  }, [data, stats, hoverPoint, windowSize])
+  }, [data, stats, hoverPoint, windowSize, selectedPeriod])
 
   // Get period performance from pre-calculated values
   const getPeriodPerformance = (periodKey: string) => {
