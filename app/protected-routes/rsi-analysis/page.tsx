@@ -121,7 +121,7 @@ export default function RSIAnalysisPage() {
               </div>
               <Button
                 variant="outline"
-                onClick={() => router.push("/stock-analysis")}
+                onClick={() => router.push("/protected-routes/stock-analysis")}
                 className="border hover:border-primary hover:bg-transparent"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />

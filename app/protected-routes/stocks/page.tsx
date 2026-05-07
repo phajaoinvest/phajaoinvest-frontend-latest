@@ -78,32 +78,29 @@ export default function StocksListPage() {
         <div className="max-w-7xl mx-auto space-y-8">
 
           {/* Header Section with Glassmorphism Effect */}
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/20 via-background to-secondary/10 p-8 sm:p-12 border border-primary/10 shadow-2xl">
-            <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-secondary/20 rounded-full blur-3xl"></div>
-
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/20 via-background to-secondary/10 p-4 sm:p-8 border border-primary/10 shadow-2xl">
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider">
                   <Zap className="h-3 w-3" />
                   {t("stocks_list.market_intelligence")}
                 </div>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
+                {/* <h1 className="text-2xl font-extrabold tracking-tight text-foreground bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
                   {t("header.stocks")}
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
+                </h1> */}
+                <p className="text-sm sm:text-md text-muted-foreground max-w-xl leading-relaxed">
                   {t("stocks_list.hero_description")}
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              {/* <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <div className="relative group">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                   <Input
                     placeholder={t("stocks_list.search_placeholder")}
                     value={search}
                     onChange={handleSearch}
-                    className="pl-10 h-12 w-full sm:w-72 bg-background/50 backdrop-blur-md border-primary/20 focus:border-primary transition-all rounded-xl shadow-inner"
+                    className="text-md h-12 w-full sm:w-72 bg-background/50 backdrop-blur-md border-primary/20 focus:border-primary transition-all rounded-lg shadow-inner"
                   />
                 </div>
                 <Button
@@ -115,12 +112,12 @@ export default function StocksListPage() {
                 >
                   <RefreshCw className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`} />
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
 
           {/* Market Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Card className="bg-card/50 backdrop-blur-sm border-primary/10 shadow-sm hover:shadow-md transition-all group">
               <CardHeader className="p-5 pb-2">
                 <div className="flex items-center justify-between">
@@ -175,10 +172,10 @@ export default function StocksListPage() {
                 <div className="text-[10px] text-muted-foreground font-bold mt-1 uppercase">{t("stocks_list.instant_price")}</div>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 
           {/* Stocks Table Container */}
-          <Card className="shadow-2xl border-primary/5 bg-card/30 backdrop-blur-xl overflow-hidden rounded-3xl">
+          <Card className="shadow-2xl border-primary/5 bg-card/30 backdrop-blur-xl overflow-hidden rounded-lg">
             <CardContent className="p-0">
               {loading ? (
                 <div className="flex h-96 flex-col items-center justify-center space-y-4">
@@ -204,95 +201,169 @@ export default function StocksListPage() {
                   <Button variant="outline" onClick={() => setSearch('')} className="rounded-xl">{t("stocks_list.clear_filters")}</Button>
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader className="bg-muted/30 backdrop-blur-md">
-                      <TableRow className="border-primary/5 hover:bg-transparent">
-                        <TableHead className="w-[140px] font-bold text-foreground h-14 pl-8 uppercase tracking-wider text-[10px]">{t("stocks_list.symbol")}</TableHead>
-                        <TableHead className="font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.company_name")}</TableHead>
-                        <TableHead className="font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.sector")}</TableHead>
-                        <TableHead className="text-right font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.price_usd")}</TableHead>
-                        <TableHead className="text-center font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.technical_support")}</TableHead>
-                        <TableHead className="text-center font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.price_resistance")}</TableHead>
-                        <TableHead className="text-right pr-8 font-bold text-foreground uppercase tracking-wider text-[10px]">{t("stocks_list.actions")}</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {stocks.map((stock) => (
-                        <TableRow key={stock.id} className="border-primary/5 hover:bg-primary/[0.03] transition-all group h-20">
-                          <TableCell className="pl-8">
-                            <div className="flex flex-col">
-                              <span className="font-black text-lg tracking-tighter text-foreground group-hover:text-primary transition-colors">
-                                {stock.show_symbol ? stock.symbol : '*****'}
-                              </span>
-                              <Badge variant="outline" className="w-fit text-[9px] h-4 py-0 px-1 border-primary/20 text-primary uppercase font-black bg-primary/5">
+                <>
+                  {/* Mobile card layout */}
+                  <div className="md:hidden divide-y divide-primary/50 space-y-4">
+                    {stocks.map((stock) => (
+                      <div key={stock.id} className="p-4 space-y-4">
+                        {/* Top row: symbol + price */}
+                        <div className="flex items-start justify-between">
+                          <div className="flex flex-col">
+                            <span className="font-black text-xl tracking-tighter text-foreground">
+                              {stock.show_symbol ? stock.symbol : '*****'}
+                            </span>
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <Badge variant="outline" className="text-[9px] h-4 py-0 px-1 border-primary/20 text-primary uppercase font-black bg-primary/5">
                                 {stock.exchange || t("stocks_list.live")}
                               </Badge>
+                              <Badge className="text-white font-bold text-[9px] h-4 py-0 px-1 bg-muted/50 border border-border/20 uppercase">
+                                {stock.sector || t("stocks_list.na")}
+                              </Badge>
                             </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex flex-col">
-                              <span className="font-bold text-foreground line-clamp-1 group-hover:underline underline-offset-4 decoration-primary/30">
-                                {stock.name}
-                              </span>
-                              <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">{stock.country || t("stocks_list.global_market")}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge className="text-white font-bold text-[10px] bg-muted/50 border border-border/20 uppercase">
-                              {stock.sector || t("stocks_list.na")}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right">
+                          </div>
+                          <div className="text-right">
                             <div className="font-black text-xl font-mono tracking-tighter text-foreground">
                               {stock.last_price ? formatUSD(stock.last_price) : '-'}
                             </div>
                             {stock.change_percent !== undefined && (
-                              <div className={`text-[10px] font-bold ${stock.change_percent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                              <div className={`text-[11px] font-bold ${stock.change_percent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                                 {stock.change_percent >= 0 ? '▲' : '▼'} {Math.abs(stock.change_percent).toFixed(2)}%
                               </div>
                             )}
-                          </TableCell>
-                          <TableCell className="text-center">
-                            <div className="flex flex-col items-center justify-center space-y-1">
-                              <div className="px-3 py-1 bg-green-500/10 rounded-lg border border-green-500/20 w-32">
-                                <span className="text-[10px] text-green-600/70 font-bold block leading-none">{t("stocks_list.primary_support")}</span>
-                                <span className="text-[11px] text-green-600 font-black font-mono tracking-tight">{stock.support1 ? formatUSD(stock.support1) : '-'}</span>
-                              </div>
-                              <div className="px-3 py-1 bg-green-500/5 rounded-lg border border-green-500/10 w-32">
-                                <span className="text-[11px] text-green-600/50 font-bold block leading-none text-[8px]">{t("stocks_list.secondary")}</span>
-                                <span className="text-[11px] text-green-600/70 font-bold font-mono tracking-tight">{stock.support2 ? formatUSD(stock.support2) : '-'}</span>
-                              </div>
+                          </div>
+                        </div>
+
+                        {/* Support & Resistance */}
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="space-y-2">
+                            <div className="flex flex-row sm:flex-col items-center justify-start gap-2 px-3 py-1.5 bg-green-500/10 rounded-lg border border-green-500/20">
+                              <span className="text-[12px] text-green-600/80 font-bold block leading-none">{t("stocks_list.primary_support")}:</span>
+                              <span className="text-sm text-green-600 font-black font-mono tracking-tight">{stock.support1 ? formatUSD(stock.support1) : '-'}</span>
                             </div>
-                          </TableCell>
-                          <TableCell className="text-center">
-                            <div className="flex flex-col items-center justify-center space-y-1">
-                              <div className="px-3 py-1 bg-red-500/10 rounded-lg border border-red-500/20 w-32">
-                                <span className="text-[11px] text-red-600/70 font-bold block leading-none">{t("stocks_list.primary_target")}</span>
-                                <span className="text-[11px] text-red-600 font-black font-mono tracking-tight">{stock.resistance1 ? formatUSD(stock.resistance1) : '-'}</span>
-                              </div>
-                              <div className="px-3 py-1 bg-red-500/5 rounded-lg border border-red-500/10 w-32">
-                                <span className="text-[11px] text-red-600/50 font-bold block leading-none text-[8px]">{t("stocks_list.secondary")}</span>
-                                <span className="text-[11px] text-red-600/70 font-bold font-mono tracking-tight">{stock.resistance2 ? formatUSD(stock.resistance2) : '-'}</span>
-                              </div>
+                            <div className="flex flex-row sm:flex-col items-center justify-start gap-2 px-3 py-1.5 bg-green-500/5 rounded-lg border border-green-500/10">
+                              <span className="text-[12px] text-green-600/80 font-bold block leading-none">{t("stocks_list.secondary")}:</span>
+                              <span className="text-sm text-green-600/70 font-bold font-mono tracking-tight">{stock.support2 ? formatUSD(stock.support2) : '-'}</span>
                             </div>
-                          </TableCell>
-                          <TableCell className="text-right pr-8">
-                            <Button
-                              variant="default"
-                              size="sm"
-                              className="rounded-xl font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95 px-4"
-                              onClick={() => router.push(`/protected-routes/stock-result/${stock.symbol}`)}
-                            >
-                              {t("stocks_list.analysis_btn")}
-                              <ArrowRight className="ml-2 h-4 w-4" />
-                            </Button>
-                          </TableCell>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex flex-row sm:flex-col items-center justify-start gap-2 px-3 py-1.5 bg-red-500/10 rounded-lg border border-red-500/20">
+                              <span className="text-[12px] text-red-600/80 font-bold block leading-none">{t("stocks_list.primary_target")}:</span>
+                              <span className="text-sm text-red-600 font-black font-mono tracking-tight">{stock.resistance1 ? formatUSD(stock.resistance1) : '-'}</span>
+                            </div>
+                            <div className="flex flex-row sm:flex-col items-center justify-start gap-2 px-3 py-1.5 bg-red-500/5 rounded-lg border border-red-500/10">
+                              <span className="text-[12px] text-red-600/80 font-bold block leading-none">{t("stocks_list.secondary")}:</span>
+                              <span className="text-sm text-red-600 font-bold font-mono tracking-tight">{stock.resistance2 ? formatUSD(stock.resistance2) : '-'}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Action button */}
+                        <div className='w-full flex justify-end mt-8'>
+                          <Button
+                            variant="default"
+                            size="sm"
+                            className="w-auto rounded-lg font-bold bg-primary-foreground text-primary transition-all active:scale-95 border border-primary/30"
+                            onClick={() => router.push(`/protected-routes/stock-result/${stock.symbol}`)}
+                          >
+                            {t("stocks_list.analysis_btn")}
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Desktop table layout */}
+                  <div className="hidden md:block overflow-x-auto">
+                    <Table>
+                      <TableHeader className="bg-muted/30 backdrop-blur-md">
+                        <TableRow className="border-primary/5 hover:bg-transparent text-md">
+                          <TableHead className="w-[140px] font-bold text-foreground h-14 pl-8 uppercase tracking-wider">{t("stocks_list.symbol")}</TableHead>
+                          <TableHead className="font-bold text-foreground uppercase tracking-wider">{t("stocks_list.company_name")}</TableHead>
+                          <TableHead className="font-bold text-foreground uppercase tracking-wider">{t("stocks_list.sector")}</TableHead>
+                          <TableHead className="text-right font-bold text-foreground uppercase tracking-wider">{t("stocks_list.price_usd")}</TableHead>
+                          <TableHead className="text-center font-bold text-foreground uppercase tracking-wider">{t("stocks_list.technical_support")}</TableHead>
+                          <TableHead className="text-center font-bold text-foreground uppercase tracking-wider">{t("stocks_list.price_resistance")}</TableHead>
+                          <TableHead className="text-right pr-8 font-bold text-foreground uppercase tracking-wider">{t("stocks_list.actions")}</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
+                      </TableHeader>
+                      <TableBody>
+                        {stocks.map((stock) => (
+                          <TableRow key={stock.id} className="border-primary/5 hover:bg-primary/[0.03] transition-all group h-20">
+                            <TableCell className="pl-8">
+                              <div className="flex flex-col">
+                                <span className="font-black text-lg tracking-tighter text-foreground group-hover:text-primary transition-colors">
+                                  {stock.show_symbol ? stock.symbol : '*****'}
+                                </span>
+                                <Badge variant="outline" className="w-fit text-[9px] h-4 py-0 px-1 border-primary/20 text-primary uppercase font-black bg-primary/5">
+                                  {stock.exchange || t("stocks_list.live")}
+                                </Badge>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex flex-col">
+                                <span className="font-bold text-foreground line-clamp-1 group-hover:underline underline-offset-4 decoration-primary/30">
+                                  {stock.name}
+                                </span>
+                                <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">{stock.country || t("stocks_list.global_market")}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <Badge className="text-white font-bold text-[10px] bg-muted/50 border border-border/20 uppercase">
+                                {stock.sector || t("stocks_list.na")}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="font-black text-xl font-mono tracking-tighter text-foreground">
+                                {stock.last_price ? formatUSD(stock.last_price) : '-'}
+                              </div>
+                              {stock.change_percent !== undefined && (
+                                <div className={`text-[10px] font-bold ${stock.change_percent >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                  {stock.change_percent >= 0 ? '▲' : '▼'} {Math.abs(stock.change_percent).toFixed(2)}%
+                                </div>
+                              )}
+                            </TableCell>
+                            <TableCell className="text-center">
+                              <div className="flex flex-col items-center justify-center space-y-1">
+                                <div className="px-3 py-1 bg-green-500/10 rounded-lg border border-green-500/20 w-32">
+                                  <span className="text-[10px] text-green-600/70 font-bold block leading-none">{t("stocks_list.primary_support")}</span>
+                                  <span className="text-[11px] text-green-600 font-black font-mono tracking-tight">{stock.support1 ? formatUSD(stock.support1) : '-'}</span>
+                                </div>
+                                <div className="px-3 py-1 bg-green-500/5 rounded-lg border border-green-500/10 w-32">
+                                  <span className="text-[11px] text-green-600/50 font-bold block leading-none text-[8px]">{t("stocks_list.secondary")}</span>
+                                  <span className="text-[11px] text-green-600/70 font-bold font-mono tracking-tight">{stock.support2 ? formatUSD(stock.support2) : '-'}</span>
+                                </div>
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              <div className="flex flex-col items-center justify-center space-y-1">
+                                <div className="px-3 py-1 bg-red-500/10 rounded-lg border border-red-500/20 w-32">
+                                  <span className="text-[11px] text-red-600/70 font-bold block leading-none">{t("stocks_list.primary_target")}</span>
+                                  <span className="text-[11px] text-red-600 font-black font-mono tracking-tight">{stock.resistance1 ? formatUSD(stock.resistance1) : '-'}</span>
+                                </div>
+                                <div className="px-3 py-1 bg-red-500/5 rounded-lg border border-red-500/10 w-32">
+                                  <span className="text-[11px] text-red-600/50 font-bold block leading-none text-[8px]">{t("stocks_list.secondary")}</span>
+                                  <span className="text-[11px] text-red-600/70 font-bold font-mono tracking-tight">{stock.resistance2 ? formatUSD(stock.resistance2) : '-'}</span>
+                                </div>
+                              </div>
+                            </TableCell>
+                            <TableCell className="text-right pr-8">
+                              <Button
+                                variant="default"
+                                size="sm"
+                                className="rounded-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95 px-4"
+                                onClick={() => router.push(`/protected-routes/stock-result/${stock.symbol}`)}
+                              >
+                                {t("stocks_list.analysis_btn")}
+                                <ArrowRight className="h-4 w-4" />
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </>
               )}
             </CardContent>
           </Card>

@@ -1,8 +1,8 @@
 export const laos = {
   // header
-  "header.tool": "ເຄື່ອງມືວິເຄາະຮຸ້ນ",
-  "header.stocks": "ຮຸ້ນ",
-  "header.pricing": "ລາຄາແພັກເກດ",
+  "header.tool": "ເຄື່ອງມືວິເຄາະຫຸ້ນ",
+  "header.stocks": "ຫຸ້ນວິເຄາະແລ້ວ",
+  "header.pricing": "ແພັກແກດ",
   "header.news": "ຂ່າວສານ",
   "header.my_account": "ບັນຊີຂອງຂ້ອຍ",
   "header.dashboard": "ຫນ້າຫຼັກ",
@@ -13,7 +13,7 @@ export const laos = {
   // hero:
   "hero.title": "ລົງທຶນຢ່າງສະຫຼາດ, ໄດ້ຮັບຜົນກຳໄລຫຼາຍ",
   "hero.description":
-    "ເຂົ້າຮ່ວມແພລດຟອມພິເສດຂອງພວກເຮົາສຳລັບການວິເຄາະຫຸ້ນພິເສດ, ບັນຊີການຄ້າສາກົນ, ຮັບປະກັນຜົນຕອບແທນ 15%+, ແລະຄຳແນະນຳຫຸ້ນພິເສດປະຈຳອາທິດຈາກຜູ້ຊ່ຽວຊານຂອງພວກເຮົາ.",
+    "ເຂົ້າຮ່ວມແພລດຟອມພິເສດຂອງພວກເຮົາສຳລັບການວິເຄາະຫຸ້ນພິເສດ, ເປີດບັນຊີຫຸ້ນ, ຮັບປະກັນຜົນຕອບແທນ 15%+, ແລະ ແນະນຳຫຸ້ນພິເສດປະຈຳອາທິດຈາກຜູ້ຊ່ຽວຊານຂອງພວກເຮົາ.",
   "hero.becomeMember": "ເປັນສະມາຊິກ",
   "hero.learnMore": "ຮຽນຮູ້ເພີ່ມເຕີມ",
 
@@ -398,9 +398,9 @@ export const laos = {
   // stock pick page:
   "stock.pick_title": "ຕະຫຼາດການເລືອກຫຸ້ນພຣີມຽມ",
   "stock.pick_des":
-    "ຊື້ຂໍ້ສະເໜີແນະຫຸ້ນລາຍການຈາກນັກວິເຄາະຜູ້ຊ່ຽວຊານຂອງພວກເຮົາ. ຈ່າຍຕໍ່ການເລືອກ ແລະຮັບການວິເຄາະລາຍລະອຽດຜ່ານທາງອີເມວ.",
+    "ທ່ານສາມາດເລືອກຊື້ຫຸ້ນທີ່ຜູ້ຊ່ຽວຊານຂອງພວກເຮົາໄດ້ວິເຄາະແລ້ວ ຊື່ງມີໂອກາດທໍາກຳໄລສູງຫຼາຍ..",
   "stock.pick_search": "ຄົ້ນຫາປະເພດຫຸ້ນ....",
-  "stock.pick_filter": "ການກັ່ນຕອງຄວາມສ່ຽງ",
+  "stock.pick_filter": "ກັ່ນຕອງ",
   "stock.pick_filter_all": "ທັງໝົດ",
   "stock.pick_filter_low": "ຄວາມສ່ຽງຕໍ່າ",
   "stock.pick_filter_medium": "ຄວາມສ່ຽງປານກາງ",
@@ -412,8 +412,8 @@ export const laos = {
   "stock.pick_risk": "ຄວາມສ່ຽງ",
   "stock.pick_picked": "ໄດ້ເລືອກແລ້ວ",
   "stock.pick_pick_now": "ເລືອກດຽວນີ້",
-  "stock.pick_no_found": "ບໍ່ພົບການເລືອກຫຸ້ນທີ່ກົງກັບເງື່ອນໄຂຂອງທ່ານ.",
-  "stock.pick_work_title": "ມັນເຮັດວຽກແນວໃດ",
+  "stock.pick_no_found": "ຍັງບໍ່ມີຫຸ້ນທີ່ວິເຄາະແລ້ວເທື່ອ",
+  "stock.pick_work_title": "ວິທີການ ແລະ ຂັ້ນຕອນການຊື້",
   "stock.pick_work1_title": "1. ຄົ້ນຫາ ແລະເລືອກ",
   "stock.pick_work1_des":
     "ຄົ້ນຫາການເລືອກຫຸ້ນທີ່ຄັດສັນຂອງພວກເຮົາ ແລະເລືອກອັນທີ່ກົງກັບຍຸດທະສາດການລົງທຶນຂອງທ່ານ.",
@@ -538,6 +538,34 @@ export const laos = {
   "stock_result.operating_income": "ລາຍໄດ້ຈາກການດຳເນີນງານ",
   "stock_result.net_income": "ລາຍໄດ້ສຸດທິ",
   "stock_result.yoy_growth": "ການຂະຫຍາຍຕົວປີຕໍ່ປີ (%)",
+  "stock_result.returns_analysis_title": "ການວິເຄາະຜົນຕອບແທນ",
+  "stock_result.latest_close": "ລາຄາປິດຫຼ້າສຸດ",
+  "stock_result.real_time_data": "ຂໍ້ມູນເວລາຈິງ",
+  "stock_result.performance_summary": "ສະຫຼຸບຜົນງານ",
+  "stock_result.best_performance": "ດີທີ່ສຸດ",
+  "stock_result.performance": "ຜົນງານ",
+  "stock_result.worst_performance": "ຕ່ຳສຸດ",
+  "stock_result.average_return": "ສະເລ່ຍ",
+  "stock_result.return": "ຜົນຕອບແທນ",
+  "stock_result.periods": "ໄລຍະເວລາ",
+  "stock_result.performance_by_period": "ຜົນງານຕາມໄລຍະເວລາ:",
+  "stock_result.positive": "ບວກ",
+  "stock_result.negative": "ລົບ",
+  "stock_result.period_label": "ໄລຍະເວລາ",
+  "stock_result.start_price": "ລາຄາເລີ່ມຕົ້ນ",
+  "stock_result.end_price": "ລາຄາສິ້ນສຸດ",
+  "stock_result.change_percent_label": "ການປ່ຽນແປງ %",
+  "stock_result.date_range": "ຊ່ວງວັນທີ",
+  "stock_result.progress": "ຄວາມຄືບໜ້າ",
+  "stock_result.1_day": "1 ວັນ",
+  "stock_result.1_week": "1 ອາທິດ",
+  "stock_result.1_month": "1 ເດືອນ",
+  "stock_result.3_months": "3 ເດືອນ",
+  "stock_result.6_months": "6 ເດືອນ",
+  "stock_result.1_year": "1 ປີ",
+  "stock_result.latest_news_title": "ຂ່າວລ່າສຸດ",
+  "stock_result.read_more": "ອ່ານເພີ່ມເຕີມ",
+  "stock_result.no_performance_data": "ບໍ່ມີຂໍ້ມູນຜົນງານ",
   "guess.select_stock_prompt": "ເລືອກສິນຊັບ",
   "guess.select_stock_desc": "ເລືອກຫຸ້ນຈາກລາຍການເພື່ອເລີ່ມການເທຣດຂອງທ່ານ.",
   "guess.disclaimer": "ການຈຳລອງການເທຣດເທົ່ານັ້ນ. ບໍ່ມີເງິນຈິງກ່ຽວຂ້ອງ.",
@@ -545,7 +573,7 @@ export const laos = {
   "guess.in_assets": "ໃນ {count} ສິນຊັບ",
 
   // Paper Portfolio
-  "paper.title": "ພອດຈຳລອງ",
+  "paper.title": "ພັອດຈໍາລອງ",
   "paper.subtitle": "ຕິດຕາມການເທຣດຈຳລອງດ້ວຍກຳໄລ/ຂາດທຶນຈິງ — ບໍ່ມີເງິນຈິງ",
   "paper.real_time_sim": "ການຈຳລອງແບບຣຽວທາມ",
   "paper.refresh": "ໂຫຼດໃໝ່",
@@ -577,7 +605,8 @@ export const laos = {
   "paper.realized_pnl": "ກຳໄລທີ່ຮັບຮູ້ແລ້ວ",
   "paper.closed_at": "ປິດເມື່ອ",
   "paper.close_trade": "ປິດອໍເດີ",
-  "paper.close_desc": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການປິດອໍເດີນີ້? ເງິນຈະກັບຄືນສູ່ຍອດຈຳລອງຂອງທ່ານ.",
+  "paper.close_desc":
+    "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການປິດອໍເດີນີ້? ເງິນຈະກັບຄືນສູ່ຍອດຈຳລອງຂອງທ່ານ.",
   "paper.unrealized_pnl": "ກຳໄລຍັງບໍ່ຮັບຮູ້",
   "paper.close_warn": "ລາຄາປິດຈະຖືກດຶງມາແບບສົດໆ ແລະອາດຈະແຕກຕ່າງກັນເລັກໜ້ອຍ.",
   "paper.cancel": "ຍົກເລີກ",
@@ -598,7 +627,7 @@ export const laos = {
   "dashboard.sidebar.membership": "ສະມາຊິກ",
   "dashboard.sidebar.my_investment": "ການລົງທຶນຂອງຂ້ອຍ",
   "dashboard.sidebar.my_stock": "ຫຸ້ນຂອງຂ້ອຍ",
-  "dashboard.sidebar.stock_pick_history": "ປະຫວັດຫຸ້ນແນະນຳ",
+  "dashboard.sidebar.stock_pick_history": "ປະຫວັດການຂື້ຫຸ້ນແນະນຳ",
   "dashboard.sidebar.home": "ໜ້າຫຼັກ",
   "dashboard.sidebar.member": "ສະມາຊິກ",
   "dashboard.sidebar.investment": "ການລົງທຶນ",
@@ -618,11 +647,14 @@ export const laos = {
   // Membership page
   "membership.title": "ແພັກເກັດສະມາຊິກ",
   "membership.coupon_title": "ແລກຄູປອງ",
-  "membership.coupon_description": "ມີລະຫັດສ່ວນຫຼຸດບໍ? ປ້ອນລະຫັດຂ້າງລຸ່ມນີ້ເພື່ອແລກຮັບສະມາຊິກພຣີມຽມຂອງທ່ານ.",
+  "membership.coupon_description":
+    "ມີລະຫັດສ່ວນຫຼຸດບໍ? ປ້ອນລະຫັດຂ້າງລຸ່ມນີ້ເພື່ອແລກຮັບສະມາຊິກພຣີມຽມຂອງທ່ານ.",
   "membership.coupon_placeholder": "ປ້ອນລະຫັດຄູປອງ",
   "membership.coupon_button": "ແລກຄູປອງດຽວນີ້",
-  "membership.coupon_success": "ແລກຄູປອງສຳເລັດແລ້ວ! ສະມາຊິກພຣີມຽມຂອງທ່ານຖືກເປີດໃຊ້ແລ້ວ.",
-  "membership.coupon_error": "ບໍ່ສາມາດແລກຄູປອງໄດ້. ກະລຸນາກວດສອບລະຫັດ ແລະ ລອງໃໝ່ອີກຄັ້ງ.",
+  "membership.coupon_success":
+    "ແລກຄູປອງສຳເລັດແລ້ວ! ສະມາຊິກພຣີມຽມຂອງທ່ານຖືກເປີດໃຊ້ແລ້ວ.",
+  "membership.coupon_error":
+    "ບໍ່ສາມາດແລກຄູປອງໄດ້. ກະລຸນາກວດສອບລະຫັດ ແລະ ລອງໃໝ່ອີກຄັ້ງ.",
   "membership.subtitle": "ອັບເກຣດ ຫຼື ປ່ຽນແພັກເກັດສະມາຊິກຂອງທ່ານ",
   "membership.loading": "ກຳລັງໂຫຼດ...",
   "membership.under_review": "ແພັກເກັດຂອງທ່ານກຳລັງກວດສອບ",
@@ -639,7 +671,8 @@ export const laos = {
   "membership.start": "ເລີ່ມ:",
   "membership.expires": "ໝົດອາຍຸ:",
   "membership.no_history": "ບໍ່ພົບ",
-  "membership.no_history_des": "ບໍ່ພົບປະຫວັດການຊຳລະເງິນ! ກະລຸນາຕິດຕໍ່ຜູ້ດູແລລະບົບ.",
+  "membership.no_history_des":
+    "ບໍ່ພົບປະຫວັດການຊຳລະເງິນ! ກະລຸນາຕິດຕໍ່ຜູ້ດູແລລະບົບ.",
 
   // Membership plan descriptions (by duration)
   "membership.plan_3_months": "ສະມາຊິກພຣີເມຍມ 3 ເດືອນ",
@@ -673,21 +706,24 @@ export const laos = {
   "invest.filter_by_date": "ກັ່ນຕອງການລົງທຶນຕາມວັນທີ",
   "invest.loading": "ກຳລັງໂຫຼດ...",
   "invest.not_found": "ບໍ່ພົບ",
-  "invest.no_investments": "ບໍ່ພົບປະຫວັດການລົງທຶນ! ລົງທຶນດຽວນີ້ເພື່ອເບິ່ງການລົງທຶນຂອງທ່ານຢູ່ນີ້.",
+  "invest.no_investments":
+    "ບໍ່ພົບປະຫວັດການລົງທຶນ! ລົງທຶນດຽວນີ້ເພື່ອເບິ່ງການລົງທຶນຂອງທ່ານຢູ່ນີ້.",
   "invest.amount_invested": "ຈຳນວນເງິນລົງທຶນ",
   "invest.investment_date": "ວັນທີລົງທຶນ",
   "invest.duration": "ໄລຍະເວລາ",
   "invest.maturity_date": "ວັນທີຄົບກຳນົດ",
   "invest.total_profit_label": "ກຳໄລທັງໝົດ",
   "invest.under_review_title": "ຄຳຮ້ອງຂອງທ່ານກຳລັງຖືກກວດສອບ",
-  "invest.under_review_des": "ທີມງານຂອງພວກເຮົາກຳລັງກວດສອບຄຳຮ້ອງສະໝັກບັນຊີການລົງທຶນຂອງທ່ານ. ເມື່ອໄດ້ຮັບການອະນຸມັດ, ທ່ານຈະສາມາດເຂົ້າເຖິງຕະຫຼາດໂລກ ແລະ ເລີ່ມລົງທຶນໃນໂອກາດສາກົນ. ພວກເຮົາຈະແຈ້ງໃຫ້ທ່ານຊາບທັນທີທີ່ບັນຊີຂອງທ່ານພ້ອມ.",
+  "invest.under_review_des":
+    "ທີມງານຂອງພວກເຮົາກຳລັງກວດສອບຄຳຮ້ອງສະໝັກບັນຊີການລົງທຶນຂອງທ່ານ. ເມື່ອໄດ້ຮັບການອະນຸມັດ, ທ່ານຈະສາມາດເຂົ້າເຖິງຕະຫຼາດໂລກ ແລະ ເລີ່ມລົງທຶນໃນໂອກາດສາກົນ. ພວກເຮົາຈະແຈ້ງໃຫ້ທ່ານຊາບທັນທີທີ່ບັນຊີຂອງທ່ານພ້ອມ.",
   "invest.status_completed": "ສຳເລັດ",
   "invest.status_pending": "ລໍຖ້າ",
   "invest.status_active": "ໃຊ້ງານຢູ່",
 
   // Add new investment page
   "invest.new_title": "ຄຳຮ້ອງສະໝັກລົງທຶນໃໝ່",
-  "invest.new_des": "ເລີ່ມການເດີນທາງຂອງທ່ານສູ່ຜົນຕອບແທນ 15%+ ຕໍ່ປີກັບບໍລິການຈັດການການລົງທຶນມືອາຊີບຂອງພວກເຮົາ",
+  "invest.new_des":
+    "ເລີ່ມການເດີນທາງຂອງທ່ານສູ່ຜົນຕອບແທນ 15%+ ຕໍ່ປີກັບບໍລິການຈັດການການລົງທຶນມືອາຊີບຂອງພວກເຮົາ",
   "invest.step1_title": "ລາຍລະອຽດການລົງທຶນ",
   "invest.step1_des": "ຄວາມມັກ ແລະ ເປົ້າໝາຍການລົງທຶນ",
   "invest.step2_title": "ຂັ້ນຕອນການຊຳລະ",
@@ -736,9 +772,11 @@ export const laos = {
   "invest.payment_receipt": "ໃບຮັບການຊຳລະ",
   "invest.file_types": "PNG, JPG ຫຼື PDF (ສູງສຸດ 10MB)",
   "invest.timeline_title": "ໄລຍະເວລາການດຳເນີນການ",
-  "invest.timeline_des": "ຫຼັງຈາກສົ່ງຄຳຮ້ອງ ແລະ ຫຼັກຖານການຊຳລະ, ທີມງານຂອງພວກເຮົາຈະກວດສອບ ແລະ ອະນຸມັດການລົງທຶນຂອງທ່ານພາຍໃນ 24 ຊົ່ວໂມງ. ທ່ານຈະໄດ້ຮັບອີເມວຢືນຢັນພ້ອມລາຍລະອຽດການລົງທຶນ.",
+  "invest.timeline_des":
+    "ຫຼັງຈາກສົ່ງຄຳຮ້ອງ ແລະ ຫຼັກຖານການຊຳລະ, ທີມງານຂອງພວກເຮົາຈະກວດສອບ ແລະ ອະນຸມັດການລົງທຶນຂອງທ່ານພາຍໃນ 24 ຊົ່ວໂມງ. ທ່ານຈະໄດ້ຮັບອີເມວຢືນຢັນພ້ອມລາຍລະອຽດການລົງທຶນ.",
   "invest.success_title": "ສົ່ງຄຳຮ້ອງສຳເລັດແລ້ວ!",
-  "invest.success_des": "ຄຳຮ້ອງສະໝັກການລົງທຶນແບບຮັບປະກັນຜົນຕອບແທນໄດ້ຖືກຮັບ ແລະ ກຳລັງກວດສອບ",
+  "invest.success_des":
+    "ຄຳຮ້ອງສະໝັກການລົງທຶນແບບຮັບປະກັນຜົນຕອບແທນໄດ້ຖືກຮັບ ແລະ ກຳລັງກວດສອບ",
   "invest.pending_review": "ກຳລັງກວດສອບ",
   "invest.back_to_invest": "ກັບຄືນການລົງທຶນ",
   "invest.download_receipt": "ດາວໂຫຼດໃບຮັບ (PDF)",
@@ -758,7 +796,8 @@ export const laos = {
 
   // Complete application component
   "invest.complete_app_title": "ສຳເລັດຄຳຮ້ອງສະໝັກ",
-  "invest.complete_app_des": "ເພື່ອເລີ່ມລົງທຶນ, ທ່ານຕ້ອງສຳເລັດການສະໝັກບັນຊີກ່ອນ. ນີ້ຈະເປີດໃຫ້ທ່ານເຂົ້າເຖິງຕະຫຼາດໂລກ ແລະ ໂອກາດການລົງທຶນສາກົນ.",
+  "invest.complete_app_des":
+    "ເພື່ອເລີ່ມລົງທຶນ, ທ່ານຕ້ອງສຳເລັດການສະໝັກບັນຊີກ່ອນ. ນີ້ຈະເປີດໃຫ້ທ່ານເຂົ້າເຖິງຕະຫຼາດໂລກ ແລະ ໂອກາດການລົງທຶນສາກົນ.",
   "invest.what_you_need": "ສິ່ງທີ່ທ່ານຕ້ອງການ:",
   "invest.need_id": "ຂໍ້ມູນສ່ວນຕົວ ແລະ ເອກະສານຢືນຢັນຕົວຕົນ",
   "invest.need_address": "ຫຼັກຖານທີ່ຢູ່",
@@ -769,8 +808,9 @@ export const laos = {
 
   // Application form
   "app.page_title": "ຄຳຮ້ອງສະໝັກບັນຊີຂອງທ່ານ",
-  "app.stock_des": "ກະລຸນາກອກຂໍ້ມູນສ່ວນຕົວຂອງທ່ານເພື່ອເປີດບັນຊີຮຸ້ນສາກົນ",
-  "app.invest_des": "ກະລຸນາກອກຂໍ້ມູນສ່ວນຕົວຂອງທ່ານເພື່ອເປີດບັນຊີລົງທຶນໃໝ່ໃນ Phajaoinvest.",
+  "app.stock_des": "ກະລຸນາກອກຂໍ້ມູນສ່ວນຕົວຂອງທ່ານເພື່ອເປີດບັນຊີຫຸ້ນສາກົນ",
+  "app.invest_des":
+    "ກະລຸນາກອກຂໍ້ມູນສ່ວນຕົວຂອງທ່ານເພື່ອເປີດບັນຊີລົງທຶນໃໝ່ໃນ Phajaoinvest.",
   "app.step_personal": "ຂໍ້ມູນສ່ວນຕົວ",
   "app.step_contact": "ລາຍລະອຽດການຕິດຕໍ່",
   "app.step_employment": "ການຈ້າງງານ",
@@ -782,9 +822,11 @@ export const laos = {
   "app.bank_statement_label": "ໃບລາຍງານທະນາຄານ",
   "app.bank_statement_hint": "ໃບລາຍງານທະນາຄານ 2 ເດືອນຫຼ້າສຸດ (ເປັນພາສາອັງກິດ)",
   "app.identity_front_label": "ສຳເນົາບັດປະຈຳຕົວດ້ານໜ້າ",
-  "app.identity_front_hint": "ອັບໂຫຼດສຳເນົາບັດປະຈຳຕົວດ້ານໜ້າທີ່ຊັດເຈນ (PDF, JPG, PNG)",
+  "app.identity_front_hint":
+    "ອັບໂຫຼດສຳເນົາບັດປະຈຳຕົວດ້ານໜ້າທີ່ຊັດເຈນ (PDF, JPG, PNG)",
   "app.identity_back_label": "ສຳເນົາບັດປະຈຳຕົວດ້ານຫຼັງ",
-  "app.identity_back_hint": "ອັບໂຫຼດສຳເນົາບັດປະຈຳຕົວດ້ານຫຼັງທີ່ຊັດເຈນ (PDF, JPG, PNG)",
+  "app.identity_back_hint":
+    "ອັບໂຫຼດສຳເນົາບັດປະຈຳຕົວດ້ານຫຼັງທີ່ຊັດເຈນ (PDF, JPG, PNG)",
   "app.first_name": "ຊື່",
   "app.first_name_placeholder": "ກະລຸນາປ້ອນຊື່ຂອງທ່ານ",
   "app.last_name": "ນາມສະກຸນ",
@@ -861,15 +903,19 @@ export const laos = {
   "app.identity_back_doc": "ບັດປະຈຳຕົວດ້ານຫຼັງ:",
   "app.not_uploaded": "ຍັງບໍ່ໄດ້ອັບໂຫຼດ",
   "app.terms_agree": "ຂ້ອຍຍອมຮັບເງື່ອນໄຂການບໍລິການ ແລະ ສັນຍາບັນຊີ *",
-  "app.privacy_agree": "ຂ້ອຍຍອມຮັບນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ ແລະ ການປະມວນຜົນຂໍ້ມູນ *",
-  "app.submit_disclaimer": "ໂດຍການສົ່ງຄຳຮ້ອງນີ້, ທ່ານຮັບຮູ້ວ່າຂໍ້ມູນທັງໝົດທີ່ໃຫ້ມານັ້ນຖືກຕ້ອງ ແລະ ຄົບຖ້ວນ. IBKR ຈະກວດສອບຄຳຮ້ອງ ແລະ ອາດຮ້ອງຂໍເອກະສານເພີ່ມເຕີມ. ການອະນຸມັດບັນຊີໃຊ້ເວລາ 2-3 ວັນເຮັດວຽກ.",
+  "app.privacy_agree":
+    "ຂ້ອຍຍອມຮັບນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ ແລະ ການປະມວນຜົນຂໍ້ມູນ *",
+  "app.submit_disclaimer":
+    "ໂດຍການສົ່ງຄຳຮ້ອງນີ້, ທ່ານຮັບຮູ້ວ່າຂໍ້ມູນທັງໝົດທີ່ໃຫ້ມານັ້ນຖືກຕ້ອງ ແລະ ຄົບຖ້ວນ. IBKR ຈະກວດສອບຄຳຮ້ອງ ແລະ ອາດຮ້ອງຂໍເອກະສານເພີ່ມເຕີມ. ການອະນຸມັດບັນຊີໃຊ້ເວລາ 2-3 ວັນເຮັດວຽກ.",
   "app.previous": "ກ່ອນໜ້ານີ້",
   "app.next": "ຕໍ່ໄປ",
   "app.submit": "ສົ່ງຄຳຮ້ອງ",
   "app.submitting": "ກຳລັງສົ່ງ...",
   "app.success_title": "ສົ່ງຄຳຮ້ອງສຳເລັດແລ້ວ!",
-  "app.success_stock_des": "ຄຳຮ້ອງບັນຊີຮຸ້ນສາກົນຂອງທ່ານໄດ້ຮັບແລ້ວ. ພວກເຮົາຈະກວດສອບເອກະສານ ແລະ ຕິດຕໍ່ກັບພາຍໃນ 2-3 ວັນເຮັດວຽກ.",
-  "app.success_invest_des": "ຄຳຮ້ອງບັນຊີລົງທຶນຂອງທ່ານໄດ້ຮັບແລ້ວ. ພວກເຮົາຈະກວດສອບເອກະສານ ແລະ ຕິດຕໍ່ກັບພາຍໃນ 2-3 ວັນເຮັດວຽກ.",
+  "app.success_stock_des":
+    "ຄຳຮ້ອງບັນຊີຫຸ້ນສາກົນຂອງທ່ານໄດ້ຮັບແລ້ວ. ພວກເຮົາຈະກວດສອບເອກະສານ ແລະ ຕິດຕໍ່ກັບພາຍໃນ 2-3 ວັນເຮັດວຽກ.",
+  "app.success_invest_des":
+    "ຄຳຮ້ອງບັນຊີລົງທຶນຂອງທ່ານໄດ້ຮັບແລ້ວ. ພວກເຮົາຈະກວດສອບເອກະສານ ແລະ ຕິດຕໍ່ກັບພາຍໃນ 2-3 ວັນເຮັດວຽກ.",
   "app.what_next": "ຈະເກີດຫຍັງຕໍ່ໄປ?",
   "app.next_verify": "ທີມງານຂອງພວກເຮົາຈະກວດສອບເອກະສານທີ່ສົ່ງມາ",
   "app.next_email": "ທ່ານຈະໄດ້ຮັບອີເມວຢືນຢັນເມື່ອໄດ້ຮັບອະນຸມັດ",
@@ -917,7 +963,8 @@ export const laos = {
   "buy_stock.submit_failed": "ການສົ່ງລົ້ມເຫຼວ. ກະລຸນາລອງໃໝ່.",
   "buy_stock.search_failed": "ຄົ້ນຫາລົ້ມເຫຼວ! ກະລຸນາລອງໃໝ່ພາຍຫຼັງ.",
   "buy_stock.purchase_success": "ຊື້ສຳເລັດແລ້ວ!",
-  "buy_stock.purchase_success_des": "ທ່ານໄດ້ຊື້ {quantity} ຫຸ້ນຂອງ {symbol} ສຳເລັດແລ້ວ.",
+  "buy_stock.purchase_success_des":
+    "ທ່ານໄດ້ຊື້ {quantity} ຫຸ້ນຂອງ {symbol} ສຳເລັດແລ້ວ.",
   "buy_stock.redirecting": "ກຳລັງນຳທ່ານກັບໄປພອດຫຸ້ນ...",
   "buy_stock.back_to_portfolio": "ກັບໄປພອດຫຸ້ນ",
   "buy_stock.title": "ຊື້ຫຸ້ນຕ່າງປະເທດ",
@@ -939,7 +986,8 @@ export const laos = {
   "buy_stock.price_per_share": "ລາຄາຕໍ່ຫຸ້ນ",
   "buy_stock.total_cost": "ຄ່າໃຊ້ຈ່າຍລວມ",
   "buy_stock.insufficient_funds": "ເງິນບໍ່ພຽງພໍ",
-  "buy_stock.need_more": "ທ່ານຕ້ອງການເງິນເພີ່ມອີກ ${amount} ເພື່ອດຳເນີນການຊື້ນີ້.",
+  "buy_stock.need_more":
+    "ທ່ານຕ້ອງການເງິນເພີ່ມອີກ ${amount} ເພື່ອດຳເນີນການຊື້ນີ້.",
   "buy_stock.top_up_account": "ເຕີມເງິນໃນບັນຊີ",
   "buy_stock.buying": "ກຳລັງຊື້...",
   "buy_stock.buy_now": "ຊື້ດຽວນີ້",
@@ -953,7 +1001,8 @@ export const laos = {
   "topup.error_toast": "ມີບາງຢ່າງຜິດພາດ",
   "topup.submit_failed": "ການສົ່ງລົ້ມເຫຼວ. ກະລຸນາລອງໃໝ່.",
   "topup.success_title": "ເຕີມເງິນສຳເລັດ!",
-  "topup.success_des": "ຂອບໃຈ! ພວກເຮົາໄດ້ຮັບການຊຳລະເງິນຂອງທ່ານແລ້ວ ເງິນຈະຖືກເພີ່ມໃນບັນຊີຫຸ້ນພາຍໃນ 24 ຊົ່ວໂມງ.",
+  "topup.success_des":
+    "ຂອບໃຈ! ພວກເຮົາໄດ້ຮັບການຊຳລະເງິນຂອງທ່ານແລ້ວ ເງິນຈະຖືກເພີ່ມໃນບັນຊີຫຸ້ນພາຍໃນ 24 ຊົ່ວໂມງ.",
   "topup.success_note": "ຫາກມີບັນຫາໃດໆ ພວກເຮົາຈະຕິດຕໍ່ທ່ານໂດຍກົງ.",
   "topup.back_to_stock": "ກັບໄປບັນຊີຫຸ້ນ",
   "topup.add_more": "ເຕີມເງິນເພີ່ມ",
@@ -1038,7 +1087,8 @@ export const laos = {
   "sec.current_password_placeholder": "ກະລຸນາປ້ອນລະຫັດຜ່ານປັດຈຸບັນ",
   "sec.new_password": "ລະຫັດຜ່ານໃໝ່",
   "sec.new_password_placeholder": "ກະລຸນາປ້ອນລະຫັດຜ່ານໃໝ່",
-  "sec.password_hint": "ຕ້ອງມີຢ່າງໜ້ອຍ 8 ຕົວອັກສອນ ປະກອບດ້ວຍຕົວພິมໃຫຍ່ ຕົວພິມນ້ອຍ ແລະ ຕົວເລກ",
+  "sec.password_hint":
+    "ຕ້ອງມີຢ່າງໜ້ອຍ 8 ຕົວອັກສອນ ປະກອບດ້ວຍຕົວພິมໃຫຍ່ ຕົວພິມນ້ອຍ ແລະ ຕົວເລກ",
   "sec.confirm_password": "ຢືນຢັນລະຫັດຜ່ານໃໝ່",
   "sec.confirm_password_placeholder": "ຢືນຢັນລະຫັດຜ່ານໃໝ່",
   "sec.update_password": "ອັບເດດລະຫັດຜ່ານ",
@@ -1047,7 +1097,8 @@ export const laos = {
   "sec.authenticator_app": "ແອັບຢືນຢັນຕົວຕົນ",
   "sec.authenticator_app_des": "ໃຊ້ແອັບຢືນຢັນຕົວຕົນເພື່ອສ້າງລະຫັດຢືນຢັນ",
   "sec.setup_instructions": "ຂັ້ນຕອນການຕັ້ງຄ່າ:",
-  "sec.setup_step_1": "ດາວໂຫຼດແອັບຢືນຢັນຕົວຕົນ (Google Authenticator, Authy ແລະ ອື່ນໆ)",
+  "sec.setup_step_1":
+    "ດາວໂຫຼດແອັບຢືນຢັນຕົວຕົນ (Google Authenticator, Authy ແລະ ອື່ນໆ)",
   "sec.setup_step_2": "ສະແກນ QR ໂຄ້ດດ້ານລຸ່ມດ້ວຍແອັບຢືນຢັນຕົວຕົນ",
   "sec.setup_step_3": "ກະລຸນາປ້ອນລະຫັດ 6 ຫຼັກຈາກແອັບເພື່ອຢືນຢັນ",
   "sec.qr_placeholder": "ຕົວຢ່າງ QR ໂຄ້ດ",
@@ -1090,7 +1141,8 @@ export const laos = {
   "notif.email_title": "ການແຈ້ງເຕືອນທາງອີເມວ",
   "notif.email_des": "ຮັບການອັບເດດ ແລະ ການແຈ້ງເຕືອນທາງອີເມວ",
   "notif.transaction_confirmations": "ການຢືນຢັນທຸລະກຳ",
-  "notif.transaction_confirmations_des": "ຮັບການແຈ້ງເຕືອນເມື່ອທ່ານຊື້ ຫຼື ຂາຍຫຸ້ນ",
+  "notif.transaction_confirmations_des":
+    "ຮັບການແຈ້ງເຕືອນເມື່ອທ່ານຊື້ ຫຼື ຂາຍຫຸ້ນ",
   "notif.portfolio_updates": "ອັບເດດພອດການລົງທຶນ",
   "notif.portfolio_updates_des": "ສະຫຼຸບຜົນການດຳເນີນງານພອດການລົງທຶນປະຈຳວັນ",
   "notif.market_news": "ຂ່າວຕະຫຼາດ ແລະ ຂໍ້ມູນເຊິງເລິກ",
@@ -1110,13 +1162,15 @@ export const laos = {
   "notif.sms_title": "ການແຈ້ງເຕືອນທາງ SMS",
   "notif.sms_des": "ແຈ້ງເຕືອນຂໍ້ຄວາມສຳລັບອັບເດດສຳຄັນ",
   "notif.security_alerts": "ການແຈ້ງເຕືອນຄວາມປອດໄພ",
-  "notif.security_alerts_des": "ຄວາມພະຍາຍາມເຂົ້າສູ່ລະບົບ ແລະ ການແຈ້ງເຕືອນກ່ຽວກັບຄວາມປອດໄພ",
+  "notif.security_alerts_des":
+    "ຄວາມພະຍາຍາມເຂົ້າສູ່ລະບົບ ແລະ ການແຈ້ງເຕືອນກ່ຽວກັບຄວາມປອດໄພ",
   "notif.large_trades": "ການຊື້ຂາຍຂະໜາດໃຫຍ່",
   "notif.large_trades_des": "ການແຈ້ງເຕືອນສຳລັບການຊື້ຂາຍທີ່ຫຼາຍກວ່າ $10,000",
   "notif.quiet_hours": "ຊ່ວງເວລາງຽບ",
   "notif.quiet_hours_des": "ຕັ້ງເວລາທີ່ທ່ານບໍ່ຕ້ອງການຮັບການແຈ້ງເຕືອນ",
   "notif.enable_quiet_hours": "ເປີດໃຊ້ຊ່ວງເວລາງຽບ",
-  "notif.enable_quiet_hours_des": "ຢຸດການແຈ້ງເຕືອນທີ່ບໍ່ສຳຄັນໃນຊ່ວງເວລາທີ່ກຳນົດ",
+  "notif.enable_quiet_hours_des":
+    "ຢຸດການແຈ້ງເຕືອນທີ່ບໍ່ສຳຄັນໃນຊ່ວງເວລາທີ່ກຳນົດ",
   "notif.cancel": "ຍົກເລີກ",
   "notif.save": "ບັນທຶກການຕັ້ງຄ່າ",
 
@@ -1150,14 +1204,15 @@ export const laos = {
   "guess.confirm": "ຢືນຢັນ",
   "guess.trade_placed": "ສົ່ງຄຳສັ່ງແລ້ວ!",
   "guess.track_pnl": "ຄຳສັ່ງຊື້ຈຳລອງຂອງທ່ານຖືກສົ່ງແລ້ວ. ຕິດຕາມ PnL ຂອງທ່ານໃນ",
-  "guess.paper_portfolio": "ພອດຈຳລອງ",
+  "guess.paper_portfolio": "ພັອດຈໍາລອງ",
   "guess.place_another": "ເທຣດອີກຄັ້ງ",
   "guess.demo_mode": "ໂໝດຈຳລອງ",
   "guess.view_portfolio": "ເບິ່ງພອດ",
 
   // stocks list page:
-  "stocks_list.market_intelligence": "ຂໍ້ມູນຕະຫຼາດ",
-  "stocks_list.hero_description": "ເຈາະເລິກຕະຫຼາດໂລກດ້ວຍຕົວຊີ້ວັດທາງເຕັກນິກຂັ້ນສູງ ແລະ ການວິເຄາະແນວຮັບ/ແນວຕ້ານແບບພຽວທາມ.",
+  "stocks_list.market_intelligence": "ຫຸ້ນທີ່ວິເຄາະແນວຮັບ/ແນວຕ້ານແລ້ວ",
+  "stocks_list.hero_description":
+    "ເຈາະເລິກຕະຫຼາດໂລກດ້ວຍຕົວຊີ້ວັດທາງເຕັກນິກຂັ້ນສູງ ແລະ ການວິເຄາະແນວຮັບ/ແນວຕ້ານ.",
   "stocks_list.search_placeholder": "ຄົ້ນຫາສັນຍາລັກ ຫຼື ຊື່...",
   "stocks_list.total_assets": "ຊັບສິນທັງໝົດ",
   "stocks_list.live_database": "ຖານຂໍ້ມູນສົດ",
@@ -1172,7 +1227,8 @@ export const laos = {
   "stocks_list.instant_price": "ອັບເດດລາຄາທັນທີ",
   "stocks_list.syncing": "ກຳລັງຊິງຂໍ້ມູນຕະຫຼາດ...",
   "stocks_list.no_assets": "ບໍ່ພົບຊັບສິນ",
-  "stocks_list.no_assets_desc": "ພວກເຮົາບໍ່ພົບຮຸ້ນທີ່ກົງກັບເງື່ອນໄຂການຄົ້ນຫາຂອງທ່ານ. ກະລຸນາລອງສັນຍາລັກ ຫຼື ຊື່ອື່ນ.",
+  "stocks_list.no_assets_desc":
+    "ພວກເຮົາບໍ່ພົບຫຸ້ນທີ່ກົງກັບເງື່ອນໄຂການຄົ້ນຫາຂອງທ່ານ. ກະລຸນາລອງສັນຍາລັກ ຫຼື ຊື່ອື່ນ.",
   "stocks_list.clear_filters": "ລ້າງທັງໝົດ",
   "stocks_list.symbol": "ສັນຍາລັກ",
   "stocks_list.company_name": "ຊື່ບໍລິສັດ",
@@ -1181,11 +1237,11 @@ export const laos = {
   "stocks_list.technical_support": "ແນວຮັບທາງເຕັກນິກ",
   "stocks_list.price_resistance": "ແນວຕ້ານລາຄາ",
   "stocks_list.actions": "ການຈັດການ",
-  "stocks_list.primary_support": "ແນວຮັບຫຼັກ",
+  "stocks_list.primary_support": "ແນວຮັບ1",
   "stocks_list.secondary": "ສຳຮອງ",
-  "stocks_list.primary_target": "ເປົ້າໝາຍຫຼັກ",
+  "stocks_list.primary_target": "ແນວຕ້ານ1",
   "stocks_list.analysis_btn": "ວິເຄາະ",
   "stocks_list.live": "ສົດ",
   "stocks_list.global_market": "ຕະຫຼາດໂລກ",
-  "stocks_list.na": "ບໍ່ລະບຸ"
+  "stocks_list.na": "ບໍ່ລະບຸ",
 };

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useTranslation } from "@/lib/i18n"
 import { usePathname } from "next/navigation"
-import { TrendingUp, Menu, X, User, LogOut, List } from "lucide-react"
+import { TrendingUp, Menu, X, User, LogOut, List, Home, Crown, Activity, Divide } from "lucide-react"
 
 // components
 import {
@@ -53,199 +53,237 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { href: "/protected-routes/stock-analysis", label: t("header.tool") },
     { href: "/protected-routes/stocks", label: t("header.stocks") },
-    { href: "/pricing", label: t("header.pricing") },
+    { href: "/protected-routes/stock-analysis", label: t("header.tool") },
     { href: "/stock-picks", label: t("services.stock_pick") },
-    // { href: "/guess-buy", label: t("guess.title") },
     { href: "/paper-portfolio", label: t("paper.title") },
     // { href: "/protected-routes/news", label: t("header.news") },
   ]
 
   return (
-    <header
-      className={`px-2 fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 uppercase bg-background ${isScrolled
-        ? "border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/95"
-        : "border-transparent"
-        }`}
-      style={{ paddingTop: "env(safe-area-inset-top)" }}
-    >
-      <div className="sm:container flex h-14 items-center">
-        <Link href="/" className="flex items-center justify-center space-x-2">
-          <img src="/images/logo.png" alt="logo" width={28} height={36} />
-          <span className="text-md sm:text-lg font-bold text-white">Phajaoinvest</span>
-        </Link>
-
-        <nav className="hidden md:flex ml-8 space-x-6">
-          {navLinks.map(({ href, label }) => {
-            const isActive = pathname === href
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={`relative text-sm font-medium transition-colors pb-1 ${isActive
-                  ? "text-primary after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-[30%] after:h-[2px] after:bg-primary after:rounded-full"
-                  : "text-white hover:text-primary after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-[0%] hover:after:w-[30%] after:h-[2px] after:bg-yellow-600 after:rounded-full after:transition-all after:duration-300"
-                  }`}
-              >
-                {label}
-              </Link>
-            )
-          })}
-        </nav>
-
-        <div className="ml-auto flex items-center space-x-2 sm:space-x-4">
-          <LanguageSwitcher />
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="md:hidden text-white border-white/30 hover:bg-yellow-600"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-          </Button>
-
-          <div className="hidden md:flex space-x-2">
-            {customer ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="flex items-center space-x-2 text-white hover:text-yellow-600 hover:bg-white/10"
-                  >
-                    <User className="h-4 w-4" />
-                    <span className="uppercase">{t("header.my_account")}</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link href="/dashboard">{t("header.dashboard")}</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setIsRedeemModalOpen(true)} className="cursor-pointer">
-                    <Ticket className="h-4 w-4 mr-2" />
-                    <span>{t("membership.coupon_title")}</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setIsLogoutDialogOpen(true)} className="text-red-500 cursor-pointer">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    {t("header.sign_out")}
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  asChild
-                  className="text-white hover:text-yellow-600 hover:bg-white/10"
-                >
-                  <Link href="/auth/login">{t("header.login")}</Link>
-                </Button>
-                <Button size="sm" asChild className="bg-yellow-600 hover:bg-yellow-700 text-white">
-                  <Link href="/auth/register">{t("header.register")}</Link>
-                </Button>
-              </>
-            )}
-          </div>
-
-          {customer && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="md:hidden text-white border-white/30 hover:bg-yellow-600"
-              onClick={() => setIsLogoutDialogOpen(true)}
-            >
-              <LogOut className="h-4 w-4" />
-            </Button>
-          )}
-        </div>
-      </div>
-
+    <>
       {isMenuOpen && (
-        <div className="absolute top-14 left-0 right-0 max-h-[calc(100vh-3.5rem)] w-full overflow-y-auto md:hidden border-b bg-background shadow-lg p-4">
-          <nav className="flex flex-col space-y-3">
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 md:hidden"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+      <header
+        className={`px-2 fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 uppercase bg-background ${isScrolled
+          ? "border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/95"
+          : "border-transparent"
+          }`}
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
+      >
+        <div className="sm:container flex h-14 items-center">
+          <Link href="/" className="flex items-center justify-center space-x-2">
+            <img src="/images/logo.png" alt="logo" width={28} height={36} />
+            <span className="text-md sm:text-lg font-bold text-white">Phajaoinvest</span>
+          </Link>
+
+          <nav className="hidden md:flex ml-8 space-x-6">
             {navLinks.map(({ href, label }) => {
               const isActive = pathname === href
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`text-sm font-medium transition-colors ${isActive
-                    ? "text-yellow-600 underline underline-offset-4"
-                    : "hover:text-yellow-600 text-foreground"
+                  className={`relative text-sm font-medium transition-colors pb-1 ${isActive
+                    ? "text-primary after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-[30%] after:h-[2px] after:bg-primary after:rounded-full"
+                    : "text-white hover:text-primary after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-[0%] hover:after:w-[30%] after:h-[2px] after:bg-yellow-600 after:rounded-full after:transition-all after:duration-300"
                     }`}
-                  onClick={() => setIsMenuOpen(false)}
                 >
                   {label}
                 </Link>
               )
             })}
+          </nav>
 
-            <div className="flex flex-col space-y-2 pt-2 border-t mt-2">
+          <div className="ml-auto flex items-center space-x-2 sm:space-x-4">
+            <LanguageSwitcher />
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="md:hidden text-white border-white/30 hover:bg-yellow-600"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </Button>
+
+            <div className="hidden md:flex space-x-2">
               {customer ? (
-                <>
-                  <Button variant="ghost" size="sm" asChild className="justify-start">
-                    <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>{t("header.dashboard")}</Link>
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={() => { setIsRedeemModalOpen(true); setIsMenuOpen(false); }} className="justify-start">
-                    <Ticket className="h-4 w-4 mr-2" />
-                    {t("membership.coupon_title")}
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={() => { setIsLogoutDialogOpen(true); setIsMenuOpen(false); }} className="text-red-500 justify-start hover:text-red-600 hover:bg-red-50">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    {t("header.sign_out")}
-                  </Button>
-                </>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center text-white hover:text-yellow-600 hover:bg-white/10"
+                    >
+                      <User className="h-4 w-4" />
+                      <span className="uppercase">{t("header.my_account")}</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard">
+                        <Home className="h-4 w-4" />
+                        {t("header.dashboard")}
+                      </Link>
+                    </Button><br />
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard/membership">
+                        <Crown className="h-4 w-4" />
+                        {t("dashboard.sidebar.membership")}
+                      </Link>
+                    </Button><br />
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard/guaranteed-returns">
+                        <TrendingUp className="h-4 w-4" />
+                        {t("dashboard.sidebar.my_investment")}
+                      </Link>
+                    </Button><br />
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard/stock-pick-history">
+                        <Activity className="h-4 w-4" />
+                        {t("dashboard.sidebar.stock_pick_history")}
+                      </Link>
+                    </Button><br />
+                    <DropdownMenuItem onClick={() => setIsRedeemModalOpen(true)} className="cursor-pointer">
+                      <Ticket className="h-4 w-4 mr-2" />
+                      <span>{t("membership.coupon_title")}</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setIsLogoutDialogOpen(true)} className="text-red-500 cursor-pointer">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      {t("header.sign_out")}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
                     asChild
-                    className="border border-yellow-600 hover:bg-yellow-600 hover:text-white w-full justify-center"
-                    onClick={() => setIsMenuOpen(false)}
+                    className="text-white hover:text-yellow-600 hover:bg-white/10"
                   >
                     <Link href="/auth/login">{t("header.login")}</Link>
                   </Button>
-                  <Button
-                    size="sm"
-                    asChild
-                    className="bg-yellow-600 hover:bg-yellow-700 text-white w-full justify-center"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                  <Button size="sm" asChild className="bg-yellow-600 hover:bg-yellow-700 text-white">
                     <Link href="/auth/register">{t("header.register")}</Link>
                   </Button>
                 </>
               )}
             </div>
-          </nav>
+          </div>
         </div>
-      )}
 
-      <RedeemCouponModal
-        isOpen={isRedeemModalOpen}
-        onClose={() => setIsRedeemModalOpen(false)}
-      />
+        {isMenuOpen && (
+          <div className="absolute top-14 left-0 right-0 max-h-[calc(100vh-3.5rem)] w-full overflow-y-auto md:hidden border-b bg-background shadow-lg p-4">
+            <nav className="flex flex-col space-y-4">
+              {navLinks.map(({ href, label }) => {
+                const isActive = pathname === href
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`pl-4 text-sm font-medium transition-colors my-1 ${isActive
+                      ? "text-primary"
+                      : "hover:text-primary text-foreground"
+                      }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                )
+              })}
 
-      <AlertDialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{t("logout.confirm_title")}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("logout.confirm_description")}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t("logout.cancel")}</AlertDialogCancel>
-            <AlertDialogAction onClick={logout} className="bg-rose-600 hover:bg-rose-700">
-              {t("logout.confirm")}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </header>
+              <div className="flex flex-col space-y-1 border-t mt-4">
+                {customer ? (
+                  <>
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                        <Home className="h-4 w-4" />
+                        {t("header.dashboard")}
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard/membership">
+                        <Crown className="h-4 w-4" />
+                        {t("dashboard.sidebar.membership")}
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard/guaranteed-returns">
+                        <TrendingUp className="h-4 w-4" />
+                        {t("dashboard.sidebar.my_investment")}
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild className="justify-start">
+                      <Link href="/dashboard/stock-pick-history">
+                        <Activity className="h-4 w-4" />
+                        {t("dashboard.sidebar.stock_pick_history")}
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => { setIsRedeemModalOpen(true); setIsMenuOpen(false); }} className="justify-start">
+                      <Ticket className="h-4 w-4" />
+                      {t("membership.coupon_title")}
+                    </Button>
+                    <hr />
+                    <Button variant="ghost" size="sm" onClick={() => { setIsLogoutDialogOpen(true); setIsMenuOpen(false); }} className="text-red-500 justify-start hover:text-red-600 hover:bg-red-50">
+                      <LogOut className="h-4 w-4" />
+                      {t("header.sign_out")}
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      asChild
+                      className="border border-yellow-600 hover:bg-yellow-600 hover:text-white w-full justify-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Link href="/auth/login">{t("header.login")}</Link>
+                    </Button>
+                    <Button
+                      size="sm"
+                      asChild
+                      className="bg-yellow-600 hover:bg-yellow-700 text-white w-full justify-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <Link href="/auth/register">{t("header.register")}</Link>
+                    </Button>
+                  </>
+                )}
+              </div>
+            </nav>
+          </div>
+        )}
+
+        <RedeemCouponModal
+          isOpen={isRedeemModalOpen}
+          onClose={() => setIsRedeemModalOpen(false)}
+        />
+
+        <AlertDialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>{t("logout.confirm_title")}</AlertDialogTitle>
+              <AlertDialogDescription>
+                {t("logout.confirm_description")}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>{t("logout.cancel")}</AlertDialogCancel>
+              <AlertDialogAction onClick={logout} className="bg-rose-600 hover:bg-rose-700">
+                {t("logout.confirm")}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </header>
+    </>
   )
 }
 

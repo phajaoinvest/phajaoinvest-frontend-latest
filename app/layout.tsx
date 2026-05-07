@@ -1,7 +1,5 @@
-import Link from "next/link"
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Headset } from "lucide-react"
 import { Inter, Noto_Sans_Lao, Noto_Sans_Thai } from "next/font/google"
 import { TranslationProvider } from "@/lib/i18n"
 
@@ -84,13 +82,6 @@ export default function RootLayout({
             <TranslationProvider>{children}</TranslationProvider>
             <ToastProvider />
 
-            <Link
-              href="/support"
-              className="fixed bottom-16 sm:bottom-6 right-3 sm:right-6 z-50 flex items-center gap-2 rounded-lg bg-primary px-4 py-3 text-white shadow-lg hover:bg-primary transition-all"
-            >
-              <Headset size={18} className="animate-bounce" />
-              <span className="text-sm hidden sm:block">Support</span>
-            </Link>
           </AuthProvider>
         </ThemeProvider>
       </body>

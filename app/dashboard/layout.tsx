@@ -4,12 +4,12 @@ import Link from "next/link"
 import type React from "react"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
-import { User, Crown, TrendingUp, Settings, LogOut, Activity, Crosshair, Wallet } from "lucide-react"
+// import { User, Crown, TrendingUp, Settings, LogOut, Activity, Crosshair, Wallet } from "lucide-react"
 
 import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+// import { Button } from "@/components/ui/button"
+// import { Card, CardContent } from "@/components/ui/card"
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,20 +42,20 @@ export default function DashboardLayout({
     return <div>Loading...</div>
   }
 
-  const sidebarItems = [
-    { icon: User, label: t("dashboard.sidebar.dashboard"), href: "/dashboard" },
-    { icon: Crown, label: t("dashboard.sidebar.membership"), href: "/dashboard/membership" },
-    { icon: TrendingUp, label: t("dashboard.sidebar.my_investment"), href: "/dashboard/guaranteed-returns" },
-    { icon: Activity, label: t("dashboard.sidebar.stock_pick_history"), href: "/dashboard/stock-pick-history" },
-  ]
+  // const sidebarItems = [
+  //   { icon: User, label: t("dashboard.sidebar.dashboard"), href: "/dashboard" },
+  //   { icon: Crown, label: t("dashboard.sidebar.membership"), href: "/dashboard/membership" },
+  //   { icon: TrendingUp, label: t("dashboard.sidebar.my_investment"), href: "/dashboard/guaranteed-returns" },
+  //   { icon: Activity, label: t("dashboard.sidebar.stock_pick_history"), href: "/dashboard/stock-pick-history" },
+  // ]
 
-  const mobileSidebarItems = [
-    { icon: User, label: t("dashboard.sidebar.home"), href: "/dashboard" },
-    { icon: Crown, label: t("dashboard.sidebar.member"), href: "/dashboard/membership" },
-    { icon: TrendingUp, label: t("dashboard.sidebar.investment"), href: "/dashboard/guaranteed-returns" },
-    { icon: Activity, label: t("dashboard.sidebar.stock_picks"), href: "/dashboard/stock-pick-history" },
-    { icon: Settings, label: t("dashboard.sidebar.account_settings"), href: "/dashboard/account-settings" },
-  ]
+  // const mobileSidebarItems = [
+  //   { icon: User, label: t("dashboard.sidebar.home"), href: "/dashboard" },
+  //   { icon: Crown, label: t("dashboard.sidebar.member"), href: "/dashboard/membership" },
+  //   { icon: TrendingUp, label: t("dashboard.sidebar.investment"), href: "/dashboard/guaranteed-returns" },
+  //   { icon: Activity, label: t("dashboard.sidebar.stock_picks"), href: "/dashboard/stock-pick-history" },
+  //   { icon: Settings, label: t("dashboard.sidebar.account_settings"), href: "/dashboard/account-settings" },
+  // ]
 
   const handleSignOut = () => {
     logout()
@@ -66,7 +66,8 @@ export default function DashboardLayout({
     <div className="min-h-screen bg-background flex flex-col">
       <Header />
 
-      <main className="flex-1 container mx-auto px-2 sm:px-4 py-8 mt-16">
+      {/* old  */}
+      {/* <main className="flex-1 container mx-auto px-2 sm:px-4 py-8 mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 sm:gap-8">
           <div className="lg:col-span-1 space-y-0 sm:space-y-6">
             <div className="sticky top-4">
@@ -137,10 +138,17 @@ export default function DashboardLayout({
             </div>
           </div>
         </div>
+      </main> */}
+
+      {/* new  */}
+      <main className="container mx-auto px-2 sm:px-4 py-8 mt-16">
+        <div className="w-full px-2 sm:px-0">
+          {children}
+        </div>
       </main>
 
       {/* Bottom navigation (visible only on small screens) */}
-      <nav className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden justify-around items-center bg-white border-t border-gray-200 shadow-lg py-2 md:py-4" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+      {/* <nav className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden justify-around items-center bg-white border-t border-gray-200 shadow-lg py-2 md:py-4" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
         {mobileSidebarItems.map((item, index) => {
           const IconComponent = item.icon
           const isActive = pathname === item.href
@@ -156,8 +164,8 @@ export default function DashboardLayout({
             </Link>
           )
         })}
-      </nav>
-      
+      </nav> */}
+
       <AlertDialog open={isLogoutDialogOpen} onOpenChange={setIsLogoutDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
