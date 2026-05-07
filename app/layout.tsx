@@ -81,7 +81,6 @@ export default function RootLayout({
           <AuthProvider>
             <TranslationProvider>{children}</TranslationProvider>
             <ToastProvider />
-
           </AuthProvider>
         </ThemeProvider>
       </body>

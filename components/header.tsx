@@ -69,7 +69,7 @@ export function Header() {
         />
       )}
       <header
-        className={`px-2 fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 uppercase bg-background ${isScrolled
+        className={`mb-8 px-2 fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 uppercase bg-background ${isScrolled
           ? "border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/95"
           : "border-transparent"
           }`}
